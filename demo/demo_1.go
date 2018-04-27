@@ -1,10 +1,11 @@
 package main
 
-import "log"
+import (
+	"cloud/common/db"
+	"time"
+)
 
-func main(){
-	log.Println("end")
-	log.Println("test")
-	log.Println("ddd")
-	log.Println("testqq")
+func main() {
+	client := db.GetClient()
+	client.HSet("demo_test", "demo", time.Now().Unix())
 }
