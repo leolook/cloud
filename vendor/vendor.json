@@ -9,6 +9,30 @@
 			"revisionTime": "2017-06-26T11:06:00Z"
 		},
 		{
+			"checksumSHA1": "BhMowD2DIKSd9qq8Pzh7Y3mh2/w=",
+			"path": "github.com/gin-contrib/sse",
+			"revision": "22d885f9ecc78bf4ee5d72b937e4bbcdc58e8cae",
+			"revisionTime": "2017-01-09T09:34:21Z"
+		},
+		{
+			"checksumSHA1": "lxeeevEq5g/gU05pkJHmu6MroJI=",
+			"path": "github.com/gin-gonic/gin",
+			"revision": "22ee916dfecdaabe7b541b7f76bdc8c64e99c145",
+			"revisionTime": "2017-07-05T16:25:37Z"
+		},
+		{
+			"checksumSHA1": "m+RzErbyZxy2rAAxhKvO5NaSvBE=",
+			"path": "github.com/gin-gonic/gin/binding",
+			"revision": "22ee916dfecdaabe7b541b7f76bdc8c64e99c145",
+			"revisionTime": "2017-07-05T16:25:37Z"
+		},
+		{
+			"checksumSHA1": "guIVY1IRmjYd5O3DOAcfjTVpeWo=",
+			"path": "github.com/gin-gonic/gin/render",
+			"revision": "22ee916dfecdaabe7b541b7f76bdc8c64e99c145",
+			"revisionTime": "2017-07-05T16:25:37Z"
+		},
+		{
 			"checksumSHA1": "CXrwm3uFtV/ID0sGQbeot7oWqcQ=",
 			"path": "github.com/go-redis/redis",
 			"revision": "7a034e1609674d5eb847c3885e5058c54e79a1df",
@@ -45,10 +69,34 @@
 			"revisionTime": "2017-08-04T11:55:58Z"
 		},
 		{
+			"checksumSHA1": "cRxfZM32wP1Ry67s3jLRoYxAz/E=",
+			"path": "github.com/golang/protobuf/proto",
+			"revision": "748d386b5c1ea99658fd69fe9f03991ce86a90c1",
+			"revisionTime": "2017-07-26T21:28:29Z"
+		},
+		{
 			"checksumSHA1": "exaaqV0a/t06wK1EpOqdHnMl8u4=",
 			"path": "github.com/jinzhu/configor",
 			"revision": "ff2ac2b1ce3d687c3a1da0d2847fbce42524a7f3",
 			"revisionTime": "2017-05-22T02:16:20Z"
+		},
+		{
+			"checksumSHA1": "rCNfFpeYqd2Tpi5qOFX8ckaQcMU=",
+			"path": "github.com/mattn/go-isatty",
+			"revision": "fc9e8d8ef48496124e79ae0df75490096eccf6fe",
+			"revisionTime": "2017-03-22T23:44:13Z"
+		},
+		{
+			"checksumSHA1": "kZScNEQ20idmssR5L8ynNj0Gsts=",
+			"path": "github.com/ugorji/go/codec",
+			"revision": "5efa3251c7f7d05e5d9704a69a984ec9f1386a40",
+			"revisionTime": "2017-06-20T10:48:52Z"
+		},
+		{
+			"checksumSHA1": "1Ae34VaDBPZRr7O7hsuMTX/BZ9U=",
+			"path": "golang.org/x/sys/unix",
+			"revision": "4cd6d1a821c7175768725b55ca82f14683a29ea4",
+			"revisionTime": "2017-07-14T13:21:52Z"
 		}
 	],
 	"rootPath": "cloud"
