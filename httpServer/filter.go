@@ -14,7 +14,7 @@ func Filter(c *gin.Context) {
 	if !ok {
 		log := fmt.Sprintf("Not found this action,ok:%v,url:%s", ok, url)
 		logger.Error(log)
-		c.Writer.Write([]byte(log))
+		c.String(200, log)
 		return
 	}
 	method := strings.ToUpper(c.Request.Method)
