@@ -16,6 +16,10 @@ type AppConfig struct {
 		User     string
 		Database int
 	}
+
+	Http struct {
+		Addr string
+	}
 }
 
 var conf AppConfig
@@ -27,6 +31,7 @@ func LoadConfig(file string) {
 		logger.Error("Failed to find configuration ", file)
 		os.Exit(1)
 	}
+	logger.Info("conf",conf)
 }
 
 func init() {
@@ -37,6 +42,7 @@ func init() {
 	}
 	logger.Info(fmt.Sprintf("load config path %s", confPath))
 	logger.Info("redis addr:", conf.Db.Addr)
+	logger.Info(fmt.Sprintf("httpServer addr:%s", conf.Http.Addr))
 }
 
 func GetConf() AppConfig {
