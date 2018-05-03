@@ -2,7 +2,9 @@ package httpServer
 
 import (
 	"cloud/common/config"
+	"cloud/common/flag"
 	"cloud/httpServer/controller"
+	"fmt"
 	"github.com/gin-gonic/gin"
 )
 
@@ -44,6 +46,7 @@ func init() {
 func StartUpServer() {
 	gin.SetMode(gin.ReleaseMode)
 	route := gin.Default()
+	route.Static(fmt.Sprintf("%s/%s", HEAD, flag.FilePath), flag.FilePath) //对外放开静态文件
 	for url, val := range HttpRoute {
 		route.Handle(val.Method, url, Filter)
 	}
