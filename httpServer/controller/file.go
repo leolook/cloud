@@ -3,6 +3,7 @@ package controller
 import (
 	"cloud/common/flag"
 	"cloud/common/logger"
+	"cloud/constants"
 	"cloud/httpServer/response"
 	"fmt"
 	"github.com/gin-gonic/gin"
@@ -14,11 +15,6 @@ import (
 
 type File struct{}
 
-type FileUpload struct {
-	Code uint8  `json:"code"`
-	Path string `json:"path"`
-}
-
 //上传文件
 func (File) Upload(c *gin.Context) {
 	tempFileName := c.PostForm("name")
@@ -27,17 +23,21 @@ func (File) Upload(c *gin.Context) {
 		logger.Error(fmt.Sprintf("File upload fail,err:%v", err))
 		return
 	}
-	var tempFileType string
+	tempFileType := constants.OTHER_FILE_DIRECTORY
 	if strings.Index(tempFileName, ".") != -1 {
 		tempFileType = strings.Split(tempFileName, ".")[1]
 	}
-	folder := time.Now().Format("2006-01-02")
+	folder := time.Now().Format(constants.TIME_FORMAT_Y_M_D)
 	path := fmt.Sprintf("%s/%s/%s", flag.FilePath, folder, tempFileType)
 	if err := os.MkdirAll(path, os.ModePerm); err != nil { //生成多级目录
 		logger.Error(fmt.Sprintf("Mkdir folder fail,err:%v", err))
 		return
 	}
-	path += fmt.Sprintf("/%v.%s", time.Now().Unix(), tempFileType)
+	fileName := fmt.Sprintf("%v", time.Now().Unix())
+	if tempFileType != constants.OTHER_FILE_DIRECTORY {
+		fileName = fmt.Sprintf("/%v.%s", fileName, tempFileType)
+	}
+	path += fileName
 	newFile, err := os.Create(path)
 	if err != nil {
 		logger.Error(fmt.Sprintf("Create file fail,err:%v,path:%s", err, path))
