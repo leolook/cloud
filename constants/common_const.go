@@ -7,3 +7,23 @@ const (
 const (
 	TIME_FORMAT_Y_M_D = "2006-01-02" //年月日时间格式化
 )
+
+const (
+	STR_IS_EMPTY = "" //字符串为空
+)
+
+const (
+	CODE_PARAM_IS_NULL  = 401 //参数为空
+	CODE_PARAM_IS_WRONG = 402 //参数不合法
+	CODE_SYSTEM_ERROR   = 500 //系统报错
+)
+
+const (
+	ERR_SYSTEM_ERROR               = "系统报错,请稍后重试"
+	ERR_FILE_PATH_CAN_NOT_BE_EMPTY = "文件路径不能为空"
+	ERR_FILE_PATH_IS_NOT_EXIST     = "文件路径不存在"
+)
+
+const (
+	SUCCESS_DEL_FILE = "文件删除成功"
+)

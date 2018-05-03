@@ -31,15 +31,17 @@ const (
 
 //请求url
 const (
-	HEAD   = "/cloud"
-	PING   = HEAD + "/ping"
-	UPLOAD = HEAD + "/upload" //上传文件
+	HEAD        = "/cloud"
+	PING        = HEAD + "/ping"
+	UPLOAD_FILE = HEAD + "/uploadFile" //上传文件
+	DEL_FILE    = HEAD + "/delFile"    //文件删除
 )
 
 func init() {
 	HttpRoute = make(map[string]*Controller)
 	HttpRoute[PING] = addRoute(GET_REQUEST, controller.Network{}.Ping)
-	HttpRoute[UPLOAD] = addRoute(POST_REQUEST, controller.File{}.Upload)
+	HttpRoute[UPLOAD_FILE] = addRoute(POST_REQUEST, controller.File{}.Upload)
+	HttpRoute[DEL_FILE] = addRoute(GET_REQUEST, controller.File{}.DelFile)
 }
 
 //启动server

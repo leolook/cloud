@@ -17,8 +17,8 @@ func setupRouter() *gin.Engine {
 	})
 
 	// Get user value
-	r.GET("/user/:name", func(c *gin.Context) {
-		user := c.Params.ByName("name")
+	r.GET("/user", func(c *gin.Context) {
+		user := c.Query("name")
 		value, ok := DB[user]
 		if ok {
 			c.JSON(200, gin.H{"user": user, "value": value})

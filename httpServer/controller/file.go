@@ -43,15 +43,49 @@ func (File) Upload(c *gin.Context) {
 		logger.Error(fmt.Sprintf("Create file fail,err:%v,path:%s", err, path))
 		return
 	}
+	defer newFile.Close()
 	temp, err := tempFile.Open()
 	if err != nil {
 		logger.Error(fmt.Sprintf("TempFile open fail,err:%v", err))
 		return
 	}
+	defer temp.Close()
 	_, err = io.Copy(newFile, temp)
 	if err != nil {
 		logger.Error(fmt.Sprintf("Copy file fail,err:%v", err))
 		return
 	}
 	c.JSON(200, response.GetSuccessResponse(path))
+}
+
+//文件删除
+func (File) DelFile(c *gin.Context) {
+	path := c.Query("path")
+	if path == constants.STR_IS_EMPTY {
+		c.JSON(200, response.GetResponse(constants.CODE_PARAM_IS_NULL, constants.ERR_FILE_PATH_CAN_NOT_BE_EMPTY))
+		return
+	}
+	if !checkFileIsExist(path) {
+		c.JSON(200, response.GetResponse(constants.CODE_PARAM_IS_WRONG, constants.ERR_FILE_PATH_IS_NOT_EXIST))
+		return
+	}
+	err := os.Remove(path)
+	if err != nil {
+		logger.Error(fmt.Sprintf("Del file fail,err:%v", err))
+		c.JSON(200, response.GetResponse(constants.CODE_SYSTEM_ERROR, constants.ERR_SYSTEM_ERROR))
+		return
+	}
+	c.JSON(200, response.GetSuccessResponse(constants.SUCCESS_DEL_FILE))
+}
+
+//判断文件是否存在
+func checkFileIsExist(path string) bool {
+	_, err := os.Stat(path)
+	if err == nil {
+		return true
+	}
+	if os.IsNotExist(err) {
+		return false
+	}
+	return true
 }
