@@ -38,6 +38,9 @@ CREATE TABLE `video_admin` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL COMMENT '用户名',
   `password` varchar(100) COLLATE utf8_unicode_ci NOT NULL COMMENT '密钥',
+  `is_login` int(1) NOT NULL DEFAULT 0 COMMENT '是否登录 默认 0 登录 1',
+  `last_login_ip` varchar(20) COLLATE utf8_unicode_ci COMMENT '最后登陆IP',
+  `last_login_time` int(11)  DEFAULT '0' COMMENT '最后登陆时间',
   `create_time` int(11) NOT NULL DEFAULT '0' COMMENT '创建时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=137 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
