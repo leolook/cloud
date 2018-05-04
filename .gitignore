@@ -4,6 +4,7 @@
 bin
 **/*.exe
 coverprofile
+config.yml
 .vscode
 .project
 pkg/**
