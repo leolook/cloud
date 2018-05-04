@@ -69,6 +69,30 @@
 			"revisionTime": "2017-08-04T11:55:58Z"
 		},
 		{
+			"checksumSHA1": "8Cqos4GXIgmoBnjtwZppdwTl2m0=",
+			"path": "github.com/go-sql-driver/mysql",
+			"revision": "bf7f34fef176d890dfcc6e94319ac747291bc09a",
+			"revisionTime": "2017-07-03T06:14:36Z"
+		},
+		{
+			"checksumSHA1": "U/h3UVHfIsfAoV3mdAi+VPSO9YA=",
+			"path": "github.com/go-xorm/builder",
+			"revision": "a4a881a4e552fcb5473f39e8b9f7d9f3457a7fb0",
+			"revisionTime": "2017-10-30T02:14:29Z"
+		},
+		{
+			"checksumSHA1": "sWLKFfBCojLd7zmDmB2i4t4J5do=",
+			"path": "github.com/go-xorm/core",
+			"revision": "7cd4078f0b35ac497ec3cf1b8caf3327f0d38440",
+			"revisionTime": "2017-11-06T06:23:03Z"
+		},
+		{
+			"checksumSHA1": "6m8SRXWMoOdZqRVZAGIgbLZsRo4=",
+			"path": "github.com/go-xorm/xorm",
+			"revision": "de4b2f9c8e82d397611a13262e0c79e7f9122aad",
+			"revisionTime": "2017-11-15T03:34:59Z"
+		},
+		{
 			"checksumSHA1": "cRxfZM32wP1Ry67s3jLRoYxAz/E=",
 			"path": "github.com/golang/protobuf/proto",
 			"revision": "748d386b5c1ea99658fd69fe9f03991ce86a90c1",

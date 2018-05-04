@@ -50,6 +50,7 @@ func setupRouter() *gin.Engine {
 }
 
 func main() {
+
 	gin.SetMode(gin.ReleaseMode)
 	r := setupRouter()
 	// Listen and Server in 0.0.0.0:8080

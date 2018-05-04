@@ -31,6 +31,7 @@ func (Admin) Login(c *gin.Context) {
 		c.JSON(200, response.GetResponse(constants.CODE_PARAM_IS_WRONG, constants.ERR_USERNAME_OR_PASSWORD_IS_WRONG))
 		return
 	}
+	c.JSON(200, response.GetSuccessResponse(data))
 }
 
 //推出登录
