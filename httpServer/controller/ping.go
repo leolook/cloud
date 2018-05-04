@@ -1,9 +1,12 @@
 package controller
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	"net/http"
+)
 
 type Network struct{}
 
 func (Network) Ping(c *gin.Context) {
-	c.String(200, "pong")
+	c.String(http.StatusOK, "pong")
 }

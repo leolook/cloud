@@ -6,6 +6,7 @@ import (
 	"cloud/httpServer/service"
 	"cloud/httpServer/service/impl"
 	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
 type Admin struct{}
@@ -23,15 +24,15 @@ func (Admin) Login(c *gin.Context) {
 	userName := c.PostForm("userName")
 	password := c.PostForm("password")
 	if userName == constants.STR_IS_EMPTY || password == constants.STR_IS_EMPTY {
-		c.JSON(200, response.GetResponse(constants.CODE_PARAM_IS_NULL, constants.ERR_USERNAME_OR_PASSWORD_CAN_NOT_BE_EMPTY))
+		c.JSON(http.StatusOK, response.GetResponse(constants.CODE_PARAM_IS_NULL, constants.ERR_USERNAME_OR_PASSWORD_CAN_NOT_BE_EMPTY))
 		return
 	}
 	data := adminService.CheckLogin(userName, password)
 	if data == nil {
-		c.JSON(200, response.GetResponse(constants.CODE_PARAM_IS_WRONG, constants.ERR_USERNAME_OR_PASSWORD_IS_WRONG))
+		c.JSON(http.StatusOK, response.GetResponse(constants.CODE_PARAM_IS_WRONG, constants.ERR_USERNAME_OR_PASSWORD_IS_WRONG))
 		return
 	}
-	c.JSON(200, response.GetSuccessResponse(data))
+	c.JSON(http.StatusOK, response.GetSuccessResponse(data))
 }
 
 //推出登录
