@@ -22,7 +22,7 @@ func (impl *AdminServiceImpl) CheckLogin(userName, password string) interface{} 
 		logger.Warn(fmt.Sprintf("Find admin fail,isExist:%verr:%v", isExist, err))
 		return nil
 	}
-	token := impl.CreateSession(userId, userName, password)
+	token := impl.createSession(userId, userName, password)
 	if token == constants.STR_IS_EMPTY {
 		return nil
 	}
@@ -34,7 +34,7 @@ func (impl *AdminServiceImpl) CheckLogin(userName, password string) interface{} 
 }
 
 //创建会话
-func (impl *AdminServiceImpl) CreateSession(userId, userName, password string) string {
+func (impl *AdminServiceImpl) createSession(userId, userName, password string) string {
 	client := db.GetClient()
 	key := constants.ADMIN_LIST_SESSION_HASH_KEY
 	sid := client.HGet(key, userId).Val()
