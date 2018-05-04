@@ -554,6 +554,10 @@ func (c *Context) Header(key, value string) {
 
 // GetHeader returns value from request headers
 func (c *Context) GetHeader(key string) string {
+	data := []rune(key)
+	if len(data) > 1 {
+		key = strings.ToUpper(string(data[0])) + strings.ToLower(string(data[1:]))
+	}
 	return c.requestHeader(key)
 }
 

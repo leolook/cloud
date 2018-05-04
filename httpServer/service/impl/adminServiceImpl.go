@@ -33,6 +33,28 @@ func (impl *AdminServiceImpl) CheckLogin(userName, password string) interface{} 
 	return data
 }
 
+//会话验证
+func (impl *AdminServiceImpl) CheckSession(userId, token string) bool {
+	client := db.GetClient()
+	key := constants.ADMIN_LIST_SESSION_HASH_KEY
+	sid := client.HGet(key, userId).Val()
+	if sid == constants.STR_IS_EMPTY {
+		return false
+	}
+	key = fmt.Sprintf(constants.ADMIN_SESSION_HASH_KEY, sid)
+	state := client.TTL(key).Val()
+	if state == -2*time.Second { //不存在
+		client.HDel(constants.ADMIN_LIST_SESSION_HASH_KEY, userId)
+		return false
+	}
+	serverToken := client.HGet(key, constants.ADMIN_SESSION_TOKEN).Val()
+	if serverToken != token {
+		return false
+	}
+	client.Expire(key, constants.ADMIN_SESSION_EXPIRE_TIME*time.Second)
+	return true
+}
+
 //创建会话
 func (impl *AdminServiceImpl) createSession(userId, userName, password string) string {
 	client := db.GetClient()
@@ -54,6 +76,7 @@ func (impl *AdminServiceImpl) createSession(userId, userName, password string) s
 	pipe.HSet(key, constants.ADMIN_SESSION_PASSWORD, password)
 	pipe.HSet(key, constants.ADMIN_SESSION_CREATE_TIME, time.Now().Unix())
 	pipe.HSet(key, constants.ADMIN_SESSION_TOKEN, token)
+	pipe.Expire(key, constants.ADMIN_SESSION_EXPIRE_TIME*time.Second)
 	key = constants.ADMIN_LIST_SESSION_HASH_KEY
 	pipe.HSet(key, userId, sid)
 	_, err := pipe.Exec()

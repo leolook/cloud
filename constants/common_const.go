@@ -1,7 +1,8 @@
 package constants
 
 const (
-	OTHER_FILE_DIRECTORY = "other" //未知文件目录
+	OTHER_FILE_DIRECTORY      = "other" //未知文件目录
+	ADMIN_SESSION_EXPIRE_TIME = 10 //管理员会话保存时间
 )
 
 const (
@@ -13,6 +14,7 @@ const (
 )
 
 const (
+	CODE_TOKEN_INVALID  = -1  //token失效
 	CODE_PARAM_IS_NULL  = 401 //参数为空
 	CODE_PARAM_IS_WRONG = 402 //参数不合法
 	CODE_SYSTEM_ERROR   = 500 //系统报错
