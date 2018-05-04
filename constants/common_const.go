@@ -19,9 +19,11 @@ const (
 )
 
 const (
-	ERR_SYSTEM_ERROR               = "系统报错,请稍后重试"
-	ERR_FILE_PATH_CAN_NOT_BE_EMPTY = "文件路径不能为空"
-	ERR_FILE_PATH_IS_NOT_EXIST     = "文件路径不存在"
+	ERR_SYSTEM_ERROR                          = "系统报错,请稍后重试"
+	ERR_FILE_PATH_CAN_NOT_BE_EMPTY            = "文件路径不能为空"
+	ERR_FILE_PATH_IS_NOT_EXIST                = "文件路径不存在"
+	ERR_USERNAME_OR_PASSWORD_CAN_NOT_BE_EMPTY = "用户名或者密码不能为空"
+	ERR_USERNAME_OR_PASSWORD_IS_WRONG         = "用户名或者密码错误"
 )
 
 const (
