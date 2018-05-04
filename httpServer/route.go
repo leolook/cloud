@@ -47,7 +47,7 @@ func init() {
 	HttpRoute[ADMIN_UPLOAD_FILE] = addRoute(POST_REQUEST, controller.File{}.Upload)
 	HttpRoute[ADMIN_DEL_FILE] = addRoute(GET_REQUEST, controller.File{}.DelFile)
 	HttpRoute[ADMIN_LOGIN] = addRoute(POST_REQUEST, controller.Admin{}.Login)
-	HttpRoute[ADMIN_LOGIN_OUT] = addRoute(POST_REQUEST, controller.Admin{}.LoginOut)
+	HttpRoute[ADMIN_LOGIN_OUT] = addRoute(GET_REQUEST, controller.Admin{}.LoginOut)
 }
 
 //启动server

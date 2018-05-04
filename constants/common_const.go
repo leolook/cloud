@@ -2,7 +2,7 @@ package constants
 
 const (
 	OTHER_FILE_DIRECTORY      = "other" //未知文件目录
-	ADMIN_SESSION_EXPIRE_TIME = 10 //管理员会话保存时间
+	ADMIN_SESSION_EXPIRE_TIME = 10      //管理员会话保存时间
 )
 
 const (
@@ -26,6 +26,7 @@ const (
 	ERR_FILE_PATH_IS_NOT_EXIST                = "文件路径不存在"
 	ERR_USERNAME_OR_PASSWORD_CAN_NOT_BE_EMPTY = "用户名或者密码不能为空"
 	ERR_USERNAME_OR_PASSWORD_IS_WRONG         = "用户名或者密码错误"
+	ERR_LOGIN_OUT                             = "退出登录失败"
 )
 
 const (

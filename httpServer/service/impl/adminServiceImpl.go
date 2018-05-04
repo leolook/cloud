@@ -55,17 +55,26 @@ func (impl *AdminServiceImpl) CheckSession(userId, token string) bool {
 	return true
 }
 
+//退出登录
+func (impl *AdminServiceImpl) LoginOut(userId string) bool {
+	client := db.GetClient()
+	key := constants.ADMIN_LIST_SESSION_HASH_KEY
+	sid := client.HGet(key, userId).Val()
+	if sid != constants.STR_IS_EMPTY { //会话已存在,清理掉之前会话
+		return impl.clearSession(userId, sid)
+	}
+	return true
+}
+
 //创建会话
 func (impl *AdminServiceImpl) createSession(userId, userName, password string) string {
 	client := db.GetClient()
 	key := constants.ADMIN_LIST_SESSION_HASH_KEY
 	sid := client.HGet(key, userId).Val()
-	pipe := client.Pipeline()
 	if sid != constants.STR_IS_EMPTY { //会话已存在,清理掉之前会话
-		pipe.HDel(key, userId)
-		key = fmt.Sprintf(constants.ADMIN_SESSION_HASH_KEY, sid)
-		pipe.Del(key)
+		impl.clearSession(userId, sid)
 	}
+	pipe := client.Pipeline()
 	//创建会话
 	sid = util.Sha1Md5(fmt.Sprintf("%v%v", userId, time.Now().UnixNano()))
 	token := util.Sha1Md5(fmt.Sprintf("%v", time.Now().UnixNano()))
@@ -85,4 +94,20 @@ func (impl *AdminServiceImpl) createSession(userId, userName, password string) s
 		return constants.STR_IS_EMPTY
 	}
 	return token
+}
+
+//清除会话
+func (impl *AdminServiceImpl) clearSession(userId, sid string) bool {
+	client := db.GetClient()
+	key := constants.ADMIN_LIST_SESSION_HASH_KEY
+	pipe := client.Pipeline()
+	pipe.HDel(key, userId)
+	key = fmt.Sprintf(constants.ADMIN_SESSION_HASH_KEY, sid)
+	pipe.Del(key)
+	result, err := pipe.Exec()
+	if err != nil {
+		logger.Error(fmt.Sprintf("Clear session err:%v,result:%v", err, result))
+		return false
+	}
+	return true
 }
