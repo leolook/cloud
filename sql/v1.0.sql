@@ -11,6 +11,8 @@ CREATE TABLE `video_file` (
   `describe` varchar(1000) COLLATE utf8_unicode_ci  COMMENT '视频描述',
   `classify_id` int(11) NOT NULL COMMENT '视频分类',
   `create_time` int(11) NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `update_user` varchar(200) COLLATE utf8_unicode_ci NOT NULL COMMENT '操作人',
+  `update_time` int(11) COLLATE utf8_unicode_ci NOT NULL COMMENT '操作时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=137 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -46,3 +48,8 @@ CREATE TABLE `video_admin` (
 ) ENGINE=InnoDB AUTO_INCREMENT=137 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT video_admin set user_name='admin',password=sha1(md5('admin')),create_time=unix_timestamp(now());
+
+INSERT INTO video_classify(name,create_time) VALUES('电影',unix_timestamp(now()));
+INSERT INTO video_classify(name,create_time) VALUES('短视频',unix_timestamp(now()));
+INSERT INTO video_classify(name,create_time) VALUES('电视',unix_timestamp(now()));
+INSERT INTO video_classify(name,create_time) VALUES('其它',unix_timestamp(now()));

@@ -27,6 +27,10 @@ const (
 	ERR_USERNAME_OR_PASSWORD_CAN_NOT_BE_EMPTY = "用户名或者密码不能为空"
 	ERR_USERNAME_OR_PASSWORD_IS_WRONG         = "用户名或者密码错误"
 	ERR_LOGIN_OUT                             = "退出登录失败"
+	ERR_VIDEO_NAME_CAN_NOT_BE_EMPTY           = "视频名称不能为空"
+	ERR_VIDEO_DESCRIBE_CAN_NOT_BE_EMPTY       = "视频描述不能为空"
+	ERR_VIDEO_CLASSIFY_CAN_NOT_BE_EMPTY       = "视频分类不能为空"
+	ERR_ADD_VIDEO_FAIL                        = "添加视频失败"
 )
 
 const (
