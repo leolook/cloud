@@ -35,7 +35,7 @@ func (Admin) Login(c *gin.Context) {
 	c.JSON(http.StatusOK, response.GetSuccessResponse(data))
 }
 
-//推出登录
+//退出登录
 func (Admin) LoginOut(c *gin.Context) {
 	userId := c.GetHeader("userId")
 	success := adminService.LoginOut(userId)
