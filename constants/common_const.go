@@ -2,7 +2,7 @@ package constants
 
 const (
 	OTHER_FILE_DIRECTORY      = "other" //未知文件目录
-	ADMIN_SESSION_EXPIRE_TIME = 10      //管理员会话保存时间
+	ADMIN_SESSION_EXPIRE_TIME = 10 * 60 //管理员会话保存时间  单位: 秒
 )
 
 const (
@@ -11,6 +11,7 @@ const (
 
 const (
 	STR_IS_EMPTY = "" //字符串为空
+	INT_IS_ZERO  = 0  //数据为0
 )
 
 const (
@@ -30,6 +31,7 @@ const (
 	ERR_VIDEO_NAME_CAN_NOT_BE_EMPTY           = "视频名称不能为空"
 	ERR_VIDEO_DESCRIBE_CAN_NOT_BE_EMPTY       = "视频描述不能为空"
 	ERR_VIDEO_CLASSIFY_CAN_NOT_BE_EMPTY       = "视频分类不能为空"
+	ERR_VIDEO_FILE_CAN_NOT_BE_EMPTY           = "请至少上传一个视频文件"
 	ERR_ADD_VIDEO_FAIL                        = "添加视频失败"
 )
 
