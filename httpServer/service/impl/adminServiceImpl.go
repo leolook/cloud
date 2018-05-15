@@ -19,7 +19,7 @@ func (impl *AdminServiceImpl) CheckLogin(userName, password string) interface{} 
 	var userId string
 	isExist, err := engine.SQL(constants.ADMIN_LOGIN_CHECK_SQL, userName, password).Get(&userId)
 	if !isExist || err != nil {
-		logger.Warn(fmt.Sprintf("Find admin fail,isExist:%verr:%v", isExist, err))
+		logger.Warn(fmt.Sprintf("Find admin fail,isExist:%v,err:%v", isExist, err))
 		return nil
 	}
 	token := impl.createSession(userId, userName, password)

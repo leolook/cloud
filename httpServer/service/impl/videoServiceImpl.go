@@ -1,6 +1,8 @@
 package impl
 
-import "cloud/httpServer/bean"
+import (
+	"cloud/httpServer/bean"
+)
 
 type VideoServiceImpl struct{}
 
