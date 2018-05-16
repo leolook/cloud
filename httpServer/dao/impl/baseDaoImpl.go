@@ -11,6 +11,7 @@ import (
 
 type BaseDaoImpl struct{}
 
+//获取admin会话
 func (impl BaseDaoImpl) GetAdminSession(userId string) *bean.AdminSession {
 	client := db.GetClient()
 	key := constants.ADMIN_LIST_SESSION_HASH_KEY

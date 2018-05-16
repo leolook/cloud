@@ -16,12 +16,15 @@ func init() {
 	}
 }
 
-//视频添加
-func (impl VideoServiceImpl) Add(userId string, video *bean.VideoBean) bool {
+//视频添加or修改
+func (impl VideoServiceImpl) AddOrUpdate(userId string, video *bean.VideoBean) bool {
+	if video.Id > 0 {
+		return videoDao.Update(userId, video)
+	}
 	return videoDao.Insert(userId, video)
 }
 
 //video 是否已存在
-func (impl VideoServiceImpl) IsExistByName(name string) bool {
+func (impl VideoServiceImpl) IsExistByName(name string) int64 {
 	return videoDao.IsExistByName(name)
 }

@@ -31,14 +31,15 @@ const (
 
 //请求url
 const (
-	HEAD              = "/cloud"
-	ADMIN             = HEAD + "/admin"
-	PING              = HEAD + "/ping"
-	ADMIN_UPLOAD_FILE = ADMIN + "/uploadFile" //上传文件
-	ADMIN_DEL_FILE    = ADMIN + "/delFile"    //文件删除
-	ADMIN_LOGIN       = ADMIN + "/login"      //登录
-	ADMIN_LOGIN_OUT   = ADMIN + "/loginOut"   //推出登录
-	ADMIN_VIDEO_ADD   = ADMIN + "/video/add"  //视频添加
+	HEAD               = "/cloud"
+	ADMIN              = HEAD + "/admin"
+	PING               = HEAD + "/ping"
+	ADMIN_UPLOAD_FILE  = ADMIN + "/uploadFile"   //上传文件
+	ADMIN_DEL_FILE     = ADMIN + "/delFile"      //文件删除
+	ADMIN_LOGIN        = ADMIN + "/login"        //登录
+	ADMIN_LOGIN_OUT    = ADMIN + "/loginOut"     //推出登录
+	ADMIN_VIDEO_ADD    = ADMIN + "/video/add"    //视频添加
+	ADMIN_VIDEO_UPDATE = ADMIN + "/video/update" //视频修改
 
 )
 
@@ -50,6 +51,7 @@ func init() {
 	HttpRoute[ADMIN_LOGIN] = addRoute(POST_REQUEST, controller.Admin{}.Login)
 	HttpRoute[ADMIN_LOGIN_OUT] = addRoute(GET_REQUEST, controller.Admin{}.LoginOut)
 	HttpRoute[ADMIN_VIDEO_ADD] = addRoute(POST_REQUEST, controller.Video{}.Add)
+	HttpRoute[ADMIN_VIDEO_UPDATE] = addRoute(POST_REQUEST, controller.Video{}.Update)
 }
 
 //启动server

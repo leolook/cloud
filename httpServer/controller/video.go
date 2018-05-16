@@ -37,12 +37,12 @@ func (this Video) Add(c *gin.Context) {
 		c.JSON(http.StatusOK, res)
 		return
 	}
-	if videoService.IsExistByName(video.Name) {
+	if videoService.IsExistByName(video.Name) > 0 {
 		c.JSON(http.StatusOK, response.GetResponse(constants.CODE_PARAM_IS_REPEAT, constants.ERR_ADD_VIDEO_REPEAT))
 		return
 	}
 	userId := c.GetHeader(constants.HTTP_HEADER_USER_ID)
-	success := videoService.Add(userId, video)
+	success := videoService.AddOrUpdate(userId, video)
 	if !success {
 		c.JSON(http.StatusOK, response.GetResponse(constants.CODE_SYSTEM_ERROR, constants.ERR_ADD_VIDEO_FAIL))
 		return
@@ -56,8 +56,31 @@ func (Video) Get(c *gin.Context) {
 }
 
 //修改
-func (Video) Update(c *gin.Context) {
-
+func (this Video) Update(c *gin.Context) {
+	var videoBean bean.VideoBean
+	err := c.Bind(&videoBean)
+	if err != nil {
+		logger.Error(fmt.Sprintf("Bind fail,err:%v", err))
+		c.JSON(http.StatusOK, response.GetResponse(constants.CODE_SYSTEM_ERROR, constants.ERR_ADD_VIDEO_FAIL))
+		return
+	}
+	video, res := this.checkParams(c, &videoBean)
+	if res != nil {
+		c.JSON(http.StatusOK, res)
+		return
+	}
+	tempId := videoService.IsExistByName(video.Name)
+	if tempId != 0 && tempId != video.Id {
+		c.JSON(http.StatusOK, response.GetResponse(constants.CODE_PARAM_IS_REPEAT, constants.ERR_ADD_VIDEO_REPEAT))
+		return
+	}
+	userId := c.GetHeader(constants.HTTP_HEADER_USER_ID)
+	success := videoService.AddOrUpdate(userId, video)
+	if !success {
+		c.JSON(http.StatusOK, response.GetResponse(constants.CODE_SYSTEM_ERROR, constants.ERR_UPDATE_VIDEO_FAIL))
+		return
+	}
+	c.JSON(http.StatusOK, response.GetSuccessResponse(nil))
 }
 
 //分页列表

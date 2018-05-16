@@ -34,6 +34,7 @@ const (
 	ERR_VIDEO_CLASSIFY_CAN_NOT_BE_EMPTY       = "视频分类不能为空"
 	ERR_VIDEO_FILE_CAN_NOT_BE_EMPTY           = "请至少上传一个视频文件"
 	ERR_ADD_VIDEO_FAIL                        = "添加视频失败"
+	ERR_UPDATE_VIDEO_FAIL                     = "修改视频失败"
 	ERR_ADD_VIDEO_REPEAT                      = "视频名称重复"
 )
 
