@@ -39,6 +39,7 @@ const (
 	ERR_GET_VIDEO_FAIL                        = "获取视频失败"
 	ERR_PARAM_CAN_NOT_BE_EMPTY                = "参数不能为空"
 	ERR_PARAM_IS_WRONG                        = "参数不合法"
+	ERR_LIST_BY_PAGE_FAIL                     = "获取分页列表失败"
 )
 
 const (

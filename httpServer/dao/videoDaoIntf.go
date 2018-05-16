@@ -8,4 +8,6 @@ type VideoDaoIntf interface {
 	Update(useId string, video *bean.VideoBean) bool //修改video
 	GetVideoInfo(id int64) *bean.VideoBean           //获取视频信息
 	GetVideoPathInfo(id int64) []bean.VideoPathBean  //获取视频文件路径信息
+	List(req bean.VideoPageReq) []bean.VideoBean     //视频分页
+	Count(req bean.VideoPageReq) int64               //视频分页数据总数
 }

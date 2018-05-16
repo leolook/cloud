@@ -17,3 +17,9 @@ type VideoPathBean struct {
 	Info       string `json:"info"`
 	CreateTime int64  `json:"createTime" xorm:"create_time"`
 }
+
+//数据分页请求参数
+type VideoPageReq struct {
+	BasePageReq
+	Name string `json:"name"`
+}

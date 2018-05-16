@@ -30,7 +30,7 @@ func (this Video) Add(c *gin.Context) {
 	err := c.Bind(&videoBean)
 	if err != nil {
 		logger.Error(fmt.Sprintf("Bind fail,err:%v", err))
-		c.JSON(http.StatusOK, response.GetResponse(constants.CODE_SYSTEM_ERROR, constants.ERR_ADD_VIDEO_FAIL))
+		c.JSON(http.StatusOK, response.GetResponse(constants.CODE_PARAM_IS_WRONG, constants.ERR_PARAM_IS_WRONG))
 		return
 	}
 	video, res := this.checkParams(c, &videoBean)
@@ -77,7 +77,7 @@ func (this Video) Update(c *gin.Context) {
 	err := c.Bind(&videoBean)
 	if err != nil {
 		logger.Error(fmt.Sprintf("Bind fail,err:%v", err))
-		c.JSON(http.StatusOK, response.GetResponse(constants.CODE_SYSTEM_ERROR, constants.ERR_ADD_VIDEO_FAIL))
+		c.JSON(http.StatusOK, response.GetResponse(constants.CODE_PARAM_IS_WRONG, constants.ERR_PARAM_IS_WRONG))
 		return
 	}
 	video, res := this.checkParams(c, &videoBean)
@@ -101,7 +101,19 @@ func (this Video) Update(c *gin.Context) {
 
 //分页列表
 func (Video) List(c *gin.Context) {
-
+	var req bean.VideoPageReq
+	err := c.Bind(&req)
+	if err != nil {
+		logger.Error(fmt.Sprintf("Bind fail,err:%v", err))
+		c.JSON(http.StatusOK, response.GetResponse(constants.CODE_PARAM_IS_WRONG, constants.ERR_PARAM_IS_WRONG))
+		return
+	}
+	data := videoService.ListByPage(req)
+	if data == nil {
+		c.JSON(http.StatusOK, response.GetResponse(constants.CODE_SYSTEM_ERROR, constants.ERR_LIST_BY_PAGE_FAIL))
+		return
+	}
+	c.JSON(http.StatusOK, response.GetSuccessResponse(data))
 }
 
 //参数校验

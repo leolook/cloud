@@ -1,9 +1,11 @@
 package impl
 
 import (
+	"cloud/common/logger"
 	"cloud/httpServer/bean"
 	"cloud/httpServer/dao"
 	. "cloud/httpServer/dao/impl"
+	"fmt"
 )
 
 type VideoServiceImpl struct{}
@@ -41,4 +43,20 @@ func (impl VideoServiceImpl) GetById(id int64) *bean.VideoBean {
 	}
 	video.Path = paths
 	return video
+}
+
+//视频分页
+func (impl VideoServiceImpl) ListByPage(req bean.VideoPageReq) *bean.BasePageRes {
+	res := new(bean.BasePageRes)
+	list := videoDao.List(req)
+	if list == nil {
+		return res
+	}
+	logger.Info(fmt.Sprintf("%v", list))
+	count := videoDao.Count(req)
+	if len(list) > 0 && count <= 0 {
+		return nil
+	}
+	res.Total, res.Rows = count, list
+	return res
 }

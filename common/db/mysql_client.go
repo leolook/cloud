@@ -25,6 +25,7 @@ func getEngineClient() error {
 			logger.Error(fmt.Sprintf("Ping mysql server err:%v", err))
 			return err
 		}
+		engine.ShowSQL(true)
 	}
 	return nil
 }
