@@ -53,8 +53,8 @@ func adminSessionIsExist(c *gin.Context, url string) bool {
 	if url == ADMIN_LOGIN || url == ADMIN_LOGIN_OUT { //登录和推出 不走会话校验
 		return true
 	}
-	userId := c.GetHeader("userId")
-	token := c.GetHeader("token")
+	userId := c.GetHeader(constants.HTTP_HEADER_USER_ID)
+	token := c.GetHeader(constants.HTTP_HEADER_TOKEN)
 	logger.Info(fmt.Sprintf("userId:%s,token:%s", userId, token))
 	if userId == constants.STR_IS_EMPTY || token == constants.STR_IS_EMPTY {
 		return false

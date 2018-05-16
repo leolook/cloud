@@ -3,13 +3,14 @@ package bean
 type VideoBean struct {
 	Id       int64           `json:"id"`
 	Name     string          `json:"name"`
-	Describe string          `json:"describe"`
+	Info     string          `json:"info"`
 	Classify int64           `json:"classify"`
 	Path     []VideoPathBean `json:"path"`
 }
 
 type VideoPathBean struct {
 	Path       string `json:"path"`
-	Order      int    `json:"order"`
+	Number     int    `json:"number"`
+	Info       string `json:"info"`
 	CreateTime int64  `json:"createTime"`
 }

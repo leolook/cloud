@@ -8,7 +8,7 @@ DROP TABLE IF EXISTS `video_file`;
 CREATE TABLE `video_file` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(200) COLLATE utf8_unicode_ci NOT NULL COMMENT '视频名称',
-  `describe` varchar(1000) COLLATE utf8_unicode_ci  COMMENT '视频描述',
+  `info` varchar(1000) COLLATE utf8_unicode_ci  COMMENT '视频描述',
   `classify_id` int(11) NOT NULL COMMENT '视频分类',
   `create_time` int(11) NOT NULL DEFAULT '0' COMMENT '创建时间',
   `update_user` varchar(200) COLLATE utf8_unicode_ci NOT NULL COMMENT '操作人',
@@ -29,7 +29,7 @@ CREATE TABLE `video_file_path` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `file_id` int(11) NOT NULL COMMENT '视频id',
   `path` varchar(200) COLLATE utf8_unicode_ci NOT NULL COMMENT '视频路径',
-  `order` int(2) NOT NULL COMMENT '视频文件顺序',
+  `number` int(2) NOT NULL COMMENT '视频文件顺序',
   `info` varchar(1000) COLLATE utf8_unicode_ci NOT NULL COMMENT '简要描述',
   `create_time` int(11) NOT NULL DEFAULT '0' COMMENT '创建时间',
   PRIMARY KEY (`id`)

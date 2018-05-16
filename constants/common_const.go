@@ -15,10 +15,11 @@ const (
 )
 
 const (
-	CODE_TOKEN_INVALID  = -1  //token失效
-	CODE_PARAM_IS_NULL  = 401 //参数为空
-	CODE_PARAM_IS_WRONG = 402 //参数不合法
-	CODE_SYSTEM_ERROR   = 500 //系统报错
+	CODE_TOKEN_INVALID   = -1  //token失效
+	CODE_PARAM_IS_NULL   = 401 //参数为空
+	CODE_PARAM_IS_WRONG  = 402 //参数不合法
+	CODE_PARAM_IS_REPEAT = 403 //数据重复
+	CODE_SYSTEM_ERROR    = 500 //系统报错
 )
 
 const (
@@ -33,8 +34,14 @@ const (
 	ERR_VIDEO_CLASSIFY_CAN_NOT_BE_EMPTY       = "视频分类不能为空"
 	ERR_VIDEO_FILE_CAN_NOT_BE_EMPTY           = "请至少上传一个视频文件"
 	ERR_ADD_VIDEO_FAIL                        = "添加视频失败"
+	ERR_ADD_VIDEO_REPEAT                      = "视频名称重复"
 )
 
 const (
 	SUCCESS_DEL_FILE = "文件删除成功"
+)
+
+const (
+	HTTP_HEADER_USER_ID = "userId"
+	HTTP_HEADER_TOKEN   = "token"
 )

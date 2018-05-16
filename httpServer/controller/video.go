@@ -37,7 +37,12 @@ func (this Video) Add(c *gin.Context) {
 		c.JSON(http.StatusOK, res)
 		return
 	}
-	success := videoService.Add(video)
+	if videoService.IsExistByName(video.Name) {
+		c.JSON(http.StatusOK, response.GetResponse(constants.CODE_PARAM_IS_REPEAT, constants.ERR_ADD_VIDEO_REPEAT))
+		return
+	}
+	userId := c.GetHeader(constants.HTTP_HEADER_USER_ID)
+	success := videoService.Add(userId, video)
 	if !success {
 		c.JSON(http.StatusOK, response.GetResponse(constants.CODE_SYSTEM_ERROR, constants.ERR_ADD_VIDEO_FAIL))
 		return
@@ -63,11 +68,11 @@ func (Video) List(c *gin.Context) {
 //参数校验
 func (Video) checkParams(c *gin.Context, video *bean.VideoBean) (*bean.VideoBean, *response.Response) {
 	video.Name = util.StrRemoveSpace(video.Name)
-	video.Describe = util.StrRemoveSpace(video.Describe)
+	video.Info = util.StrRemoveSpace(video.Info)
 	if video.Name == constants.STR_IS_EMPTY {
 		return nil, response.GetResponse(constants.CODE_PARAM_IS_NULL, constants.ERR_VIDEO_NAME_CAN_NOT_BE_EMPTY)
 	}
-	if video.Describe == constants.STR_IS_EMPTY {
+	if video.Info == constants.STR_IS_EMPTY {
 		return nil, response.GetResponse(constants.CODE_PARAM_IS_NULL, constants.ERR_VIDEO_DESCRIBE_CAN_NOT_BE_EMPTY)
 	}
 	if video.Classify == constants.INT_IS_ZERO {
