@@ -11,6 +11,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"strconv"
 )
 
 type Video struct{}
@@ -52,7 +53,22 @@ func (this Video) Add(c *gin.Context) {
 
 //编辑
 func (Video) Get(c *gin.Context) {
-
+	id := c.Query(constants.HTTP_ADMIN_VIDEO_ID)
+	if id == constants.STR_IS_EMPTY {
+		c.JSON(http.StatusOK, response.GetResponse(constants.CODE_PARAM_IS_NULL, constants.ERR_PARAM_CAN_NOT_BE_EMPTY))
+		return
+	}
+	tempId, err := strconv.Atoi(id)
+	if err != nil {
+		c.JSON(http.StatusOK, response.GetResponse(constants.CODE_PARAM_IS_WRONG, constants.ERR_PARAM_IS_WRONG))
+		return
+	}
+	data := videoService.GetById(int64(tempId))
+	if data == nil {
+		c.JSON(http.StatusOK, response.GetResponse(constants.CODE_SYSTEM_ERROR, constants.ERR_GET_VIDEO_FAIL))
+		return
+	}
+	c.JSON(http.StatusOK, response.GetSuccessResponse(data))
 }
 
 //修改

@@ -8,18 +8,18 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"io"
+	"net/http"
 	"os"
 	"strings"
 	"time"
-	"net/http"
 )
 
 type File struct{}
 
 //上传文件
 func (File) Upload(c *gin.Context) {
-	tempFileName := c.PostForm("name")
-	tempFile, err := c.FormFile("file")
+	tempFileName := c.PostForm(constants.HTTP_ADMIN_FILE_NAME)
+	tempFile, err := c.FormFile(constants.HTTP_ADMIN_FILE_FILE)
 	if err != nil {
 		logger.Error(fmt.Sprintf("File upload fail,err:%v", err))
 		return
@@ -61,7 +61,7 @@ func (File) Upload(c *gin.Context) {
 
 //文件删除
 func (File) DelFile(c *gin.Context) {
-	path := c.Query("path")
+	path := c.Query(constants.HTTP_ADMIN_FILE_PATH)
 	if path == constants.STR_IS_EMPTY {
 		c.JSON(http.StatusOK, response.GetResponse(constants.CODE_PARAM_IS_NULL, constants.ERR_FILE_PATH_CAN_NOT_BE_EMPTY))
 		return

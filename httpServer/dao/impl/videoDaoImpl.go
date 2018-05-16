@@ -54,6 +54,11 @@ func (impl VideoDaoImpl) Insert(useId string, video *bean.VideoBean) bool {
 
 //修改video
 func (impl VideoDaoImpl) Update(useId string, video *bean.VideoBean) bool {
+	info := impl.GetVideoInfo(video.Id)
+	if info != nil {
+		logger.Info(fmt.Sprintf("video info:%v", *info))
+	}
+
 	tx := db.GetEngine().NewSession()
 	impl.Tx = tx
 	if !impl.updateVideo(useId, video) {
@@ -71,6 +76,33 @@ func (impl VideoDaoImpl) Update(useId string, video *bean.VideoBean) bool {
 		return false
 	}
 	return true
+}
+
+//获取视频信息
+func (impl VideoDaoImpl) GetVideoInfo(id int64) *bean.VideoBean {
+	engine := db.GetEngine()
+	var video bean.VideoBean
+	isExist, err := engine.SQL(constants.ADMIN_VIDEO_FILE_GET_SQL, id).Get(&video)
+	if err != nil {
+		logger.Warn(fmt.Sprintf("Not found this data,id:%d,err:%v", id, err))
+		return nil
+	}
+	if !isExist {
+		return nil
+	}
+	return &video
+}
+
+//获取视频文件路径信息
+func (impl VideoDaoImpl) GetVideoPathInfo(id int64) []bean.VideoPathBean {
+	engine := db.GetEngine()
+	var paths []bean.VideoPathBean
+	err := engine.SQL(constants.ADMIN_VIDEO_PATH_GET_SQL, id).Find(&paths)
+	if err != nil {
+		logger.Warn(fmt.Sprintf("Not found video.path file_id:%d,err:%v", id, err))
+		return nil
+	}
+	return paths
 }
 
 //插入video信息

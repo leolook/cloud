@@ -40,6 +40,7 @@ const (
 	ADMIN_LOGIN_OUT    = ADMIN + "/loginOut"     //推出登录
 	ADMIN_VIDEO_ADD    = ADMIN + "/video/add"    //视频添加
 	ADMIN_VIDEO_UPDATE = ADMIN + "/video/update" //视频修改
+	ADMIN_VIDEO_GET    = ADMIN + "/video/get"    //视频获取
 
 )
 
@@ -52,6 +53,7 @@ func init() {
 	HttpRoute[ADMIN_LOGIN_OUT] = addRoute(GET_REQUEST, controller.Admin{}.LoginOut)
 	HttpRoute[ADMIN_VIDEO_ADD] = addRoute(POST_REQUEST, controller.Video{}.Add)
 	HttpRoute[ADMIN_VIDEO_UPDATE] = addRoute(POST_REQUEST, controller.Video{}.Update)
+	HttpRoute[ADMIN_VIDEO_GET] = addRoute(GET_REQUEST, controller.Video{}.Get)
 }
 
 //启动server

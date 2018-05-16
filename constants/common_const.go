@@ -36,6 +36,9 @@ const (
 	ERR_ADD_VIDEO_FAIL                        = "添加视频失败"
 	ERR_UPDATE_VIDEO_FAIL                     = "修改视频失败"
 	ERR_ADD_VIDEO_REPEAT                      = "视频名称重复"
+	ERR_GET_VIDEO_FAIL                        = "获取视频失败"
+	ERR_PARAM_CAN_NOT_BE_EMPTY                = "参数不能为空"
+	ERR_PARAM_IS_WRONG                        = "参数不合法"
 )
 
 const (
@@ -45,4 +48,13 @@ const (
 const (
 	HTTP_HEADER_USER_ID = "userId"
 	HTTP_HEADER_TOKEN   = "token"
+)
+
+const (
+	HTTP_ADMIN_LOGIN_USER_NAME = "userName"
+	HTTP_ADMIN_LOGIN_PASSWORD  = "password"
+	HTTP_ADMIN_FILE_PATH       = "path"
+	HTTP_ADMIN_FILE_NAME       = "name"
+	HTTP_ADMIN_FILE_FILE       = "file"
+	HTTP_ADMIN_VIDEO_ID        = "id"
 )

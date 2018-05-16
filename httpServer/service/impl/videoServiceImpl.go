@@ -28,3 +28,17 @@ func (impl VideoServiceImpl) AddOrUpdate(userId string, video *bean.VideoBean) b
 func (impl VideoServiceImpl) IsExistByName(name string) int64 {
 	return videoDao.IsExistByName(name)
 }
+
+//根据video id获取视频信息
+func (impl VideoServiceImpl) GetById(id int64) *bean.VideoBean {
+	video := videoDao.GetVideoInfo(id)
+	if video == nil {
+		return nil
+	}
+	paths := videoDao.GetVideoPathInfo(id)
+	if paths == nil {
+		return video
+	}
+	video.Path = paths
+	return video
+}
