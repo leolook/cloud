@@ -42,6 +42,7 @@ const (
 	ADMIN_VIDEO_UPDATE = ADMIN + "/video/update" //视频修改
 	ADMIN_VIDEO_GET    = ADMIN + "/video/get"    //视频获取
 	ADMIN_VIDEO_LIST   = ADMIN + "/video/list"   //视频列表
+	ADMIN_CLASSIFY_ALL = ADMIN + "/classify/all" //所有分类
 
 )
 
@@ -56,6 +57,7 @@ func init() {
 	HttpRoute[ADMIN_VIDEO_UPDATE] = addRoute(POST_REQUEST, controller.Video{}.Update)
 	HttpRoute[ADMIN_VIDEO_GET] = addRoute(GET_REQUEST, controller.Video{}.Get)
 	HttpRoute[ADMIN_VIDEO_LIST] = addRoute(POST_REQUEST, controller.Video{}.List)
+	HttpRoute[ADMIN_CLASSIFY_ALL] = addRoute(GET_REQUEST, controller.Classify{}.All)
 }
 
 //启动server

@@ -2,6 +2,7 @@ package impl
 
 import (
 	"cloud/common/logger"
+	"cloud/common/util"
 	"cloud/httpServer/bean"
 	"cloud/httpServer/dao"
 	. "cloud/httpServer/dao/impl"
@@ -47,6 +48,7 @@ func (impl VideoServiceImpl) GetById(id int64) *bean.VideoBean {
 
 //视频分页
 func (impl VideoServiceImpl) ListByPage(req bean.VideoPageReq) *bean.BasePageRes {
+	req.Name = util.StrRemoveSpace(req.Name)
 	res := new(bean.BasePageRes)
 	list := videoDao.List(req)
 	if list == nil {

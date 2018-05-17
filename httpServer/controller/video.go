@@ -38,7 +38,7 @@ func (this Video) Add(c *gin.Context) {
 		c.JSON(http.StatusOK, res)
 		return
 	}
-	if videoService.IsExistByName(video.Name) > 0 {
+	if videoService.IsExistByName(video.Name) > constants.INT_IS_ZERO {
 		c.JSON(http.StatusOK, response.GetResponse(constants.CODE_PARAM_IS_REPEAT, constants.ERR_ADD_VIDEO_REPEAT))
 		return
 	}

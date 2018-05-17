@@ -113,7 +113,7 @@ func (impl VideoDaoImpl) List(req bean.VideoPageReq) []bean.VideoBean {
 		appendSql := fmt.Sprintf(constants.ADMIN_VIDEO_FILE_LIKE_SQL, "%"+req.Name+"%")
 		sql = fmt.Sprintf(constants.ADMIN_VIDEO_FILE_LIST_SQL, appendSql)
 	}
-	var videos []bean.VideoBean
+	videos := make([]bean.VideoBean, 0)
 	err := engine.SQL(sql, req.GetOffset(), req.GetPageSize()).Find(&videos)
 	if err != nil {
 		logger.Error(fmt.Sprintf("Find data fail,sql:%s,err:%v", sql, err))

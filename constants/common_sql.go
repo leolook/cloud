@@ -4,6 +4,7 @@ const (
 	TABLE_VIDEO_ADMIN = "video_admin"
 	TABLE_VIDEO_FILE  = "video_file"
 	TABLE_VIDEO_PATH  = "video_file_path"
+	TABLE_CLASSIFY    = "video_classify"
 )
 
 const (
@@ -22,4 +23,6 @@ const (
 	ADMIN_VIDEO_PATH_GET_SQL    = "select * from " + TABLE_VIDEO_PATH + " where file_id=?"
 	ADMIN_VIDEO_PATH_INSERT_SQL = "insert into " + TABLE_VIDEO_PATH + "(file_id,path,number,info,create_time) values(?,?,?,?,?)"
 	ADMIN_VIDEO_PATH_DELETE_SQL = "delete from " + TABLE_VIDEO_PATH + " where file_id=?"
+
+	ADMIN_CLASSIFY_ALL_SQL = "select id,name from " + TABLE_CLASSIFY
 )
