@@ -18,11 +18,10 @@ const (
 	ADMIN_VIDEO_FILE_UPDATE_SQL      = "update " + TABLE_VIDEO_FILE + " set name=?,info=?,cover=?,classify_id=?,update_user=?,update_time=unix_timestamp(now()) where id=?"
 	ADMIN_VIDEO_FILE_LIKE_SQL        = "and name like '%s' "
 	ADMIN_VIDEO_FILE_LIST_SQL        = "select * from " + TABLE_VIDEO_FILE + " where 1=1  %s limit ?,?"
-	ADMIN_VIDEO_FILE_COUNT_SQL       = "select count(*) from " + TABLE_VIDEO_FILE + " where 1=1  %s "
-
-	ADMIN_VIDEO_PATH_GET_SQL    = "select * from " + TABLE_VIDEO_PATH + " where file_id=?"
-	ADMIN_VIDEO_PATH_INSERT_SQL = "insert into " + TABLE_VIDEO_PATH + "(file_id,path,number,info,create_time) values(?,?,?,?,?)"
-	ADMIN_VIDEO_PATH_DELETE_SQL = "delete from " + TABLE_VIDEO_PATH + " where file_id=?"
-
-	ADMIN_CLASSIFY_ALL_SQL = "select id,name from " + TABLE_CLASSIFY
+	VIDEO_FILE_COUNT_SQL             = "select count(*) from " + TABLE_VIDEO_FILE + " where 1=1  %s "
+	ADMIN_VIDEO_PATH_GET_SQL         = "select * from " + TABLE_VIDEO_PATH + " where file_id=?"
+	ADMIN_VIDEO_PATH_INSERT_SQL      = "insert into " + TABLE_VIDEO_PATH + "(file_id,path,number,info,create_time) values(?,?,?,?,?)"
+	ADMIN_VIDEO_PATH_DELETE_SQL      = "delete from " + TABLE_VIDEO_PATH + " where file_id=?"
+	ADMIN_CLASSIFY_ALL_SQL           = "select id,name from " + TABLE_CLASSIFY
+	USER_VIDEO_FILE_LIST_SQL         = "select id,name,cover from " + TABLE_VIDEO_FILE + " where 1=1  %s limit ?,?"
 )

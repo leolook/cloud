@@ -62,3 +62,20 @@ func (impl VideoServiceImpl) ListByPage(req bean.VideoPageReq) *bean.BasePageRes
 	res.Total, res.Rows = count, list
 	return res
 }
+
+//用户侧视频分页
+func (impl VideoServiceImpl) UserListByPage(req bean.VideoPageReq) *bean.BasePageRes {
+	req.Name = util.StrRemoveSpace(req.Name)
+	res := new(bean.BasePageRes)
+	list := videoDao.UserList(req)
+	if list == nil {
+		return res
+	}
+	logger.Info(fmt.Sprintf("%v", list))
+	count := videoDao.Count(req)
+	if len(list) > 0 && count <= 0 {
+		return nil
+	}
+	res.Total, res.Rows = count, list
+	return res
+}

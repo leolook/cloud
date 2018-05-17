@@ -10,4 +10,5 @@ type VideoDaoIntf interface {
 	GetVideoPathInfo(id int64) []bean.VideoPathBean  //获取视频文件路径信息
 	List(req bean.VideoPageReq) []bean.VideoBean     //视频分页
 	Count(req bean.VideoPageReq) int64               //视频分页数据总数
+	UserList(req bean.VideoPageReq) []bean.VideoBean //用户侧视频分页
 }

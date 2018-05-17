@@ -4,6 +4,7 @@ import (
 	"cloud/common/config"
 	"cloud/common/flag"
 	"cloud/httpServer/controller"
+	"cloud/httpServer/controller/user"
 	"fmt"
 	"github.com/gin-gonic/gin"
 )
@@ -33,6 +34,7 @@ const (
 const (
 	HEAD               = "/cloud"
 	ADMIN              = HEAD + "/admin"
+	USER               = HEAD + "/user"
 	PING               = HEAD + "/ping"
 	ADMIN_UPLOAD_FILE  = ADMIN + "/uploadFile"   //上传文件
 	ADMIN_DEL_FILE     = ADMIN + "/delFile"      //文件删除
@@ -43,6 +45,7 @@ const (
 	ADMIN_VIDEO_GET    = ADMIN + "/video/get"    //视频获取
 	ADMIN_VIDEO_LIST   = ADMIN + "/video/list"   //视频列表
 	ADMIN_CLASSIFY_ALL = ADMIN + "/classify/all" //所有分类
+	USER_VIDEO_LIST    = USER + "/video/list"    //视频列表
 
 )
 
@@ -58,6 +61,7 @@ func init() {
 	HttpRoute[ADMIN_VIDEO_GET] = addRoute(GET_REQUEST, controller.Video{}.Get)
 	HttpRoute[ADMIN_VIDEO_LIST] = addRoute(POST_REQUEST, controller.Video{}.List)
 	HttpRoute[ADMIN_CLASSIFY_ALL] = addRoute(GET_REQUEST, controller.Classify{}.All)
+	HttpRoute[USER_VIDEO_LIST] = addRoute(GET_REQUEST, user.Video{}.List)
 }
 
 //启动server

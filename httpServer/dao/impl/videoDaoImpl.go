@@ -122,13 +122,30 @@ func (impl VideoDaoImpl) List(req bean.VideoPageReq) []bean.VideoBean {
 	return videos
 }
 
+//用户侧视频分页
+func (impl VideoDaoImpl) UserList(req bean.VideoPageReq) []bean.VideoBean {
+	engine := db.GetEngine()
+	sql := fmt.Sprintf(constants.USER_VIDEO_FILE_LIST_SQL, constants.STR_IS_EMPTY)
+	if req.Name != constants.STR_IS_EMPTY {
+		appendSql := fmt.Sprintf(constants.USER_VIDEO_FILE_LIST_SQL, "%"+req.Name+"%")
+		sql = fmt.Sprintf(constants.USER_VIDEO_FILE_LIST_SQL, appendSql)
+	}
+	videos := make([]bean.VideoBean, 0)
+	err := engine.SQL(sql, req.GetOffset(), req.GetPageSize()).Find(&videos)
+	if err != nil {
+		logger.Error(fmt.Sprintf("Find data fail,sql:%s,err:%v", sql, err))
+		return nil
+	}
+	return videos
+}
+
 //视频分页数据总数
 func (impl VideoDaoImpl) Count(req bean.VideoPageReq) int64 {
 	engine := db.GetEngine()
-	sql := fmt.Sprintf(constants.ADMIN_VIDEO_FILE_COUNT_SQL, constants.STR_IS_EMPTY)
+	sql := fmt.Sprintf(constants.VIDEO_FILE_COUNT_SQL, constants.STR_IS_EMPTY)
 	if req.Name != constants.STR_IS_EMPTY {
 		appendSql := fmt.Sprintf(constants.ADMIN_VIDEO_FILE_LIKE_SQL, "%"+req.Name+"%")
-		sql = fmt.Sprintf(constants.ADMIN_VIDEO_FILE_COUNT_SQL, appendSql)
+		sql = fmt.Sprintf(constants.VIDEO_FILE_COUNT_SQL, appendSql)
 	}
 	var count int64
 	isExist, err := engine.SQL(sql).Get(&count)
