@@ -61,7 +61,7 @@ func init() {
 	HttpRoute[ADMIN_VIDEO_GET] = addRoute(GET_REQUEST, controller.Video{}.Get)
 	HttpRoute[ADMIN_VIDEO_LIST] = addRoute(POST_REQUEST, controller.Video{}.List)
 	HttpRoute[ADMIN_CLASSIFY_ALL] = addRoute(GET_REQUEST, controller.Classify{}.All)
-	HttpRoute[USER_VIDEO_LIST] = addRoute(GET_REQUEST, user.Video{}.List)
+	HttpRoute[USER_VIDEO_LIST] = addRoute(POST_REQUEST, user.Video{}.List)
 }
 
 //启动server
