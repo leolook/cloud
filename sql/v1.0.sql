@@ -9,6 +9,7 @@ CREATE TABLE `video_file` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(200) COLLATE utf8_unicode_ci NOT NULL COMMENT '视频名称',
   `info` varchar(1000) COLLATE utf8_unicode_ci  COMMENT '视频描述',
+  `cover` varchar(1000) COLLATE utf8_unicode_ci  COMMENT '视频封面',
   `classify_id` int(11) NOT NULL COMMENT '视频分类',
   `create_time` int(11) NOT NULL DEFAULT '0' COMMENT '创建时间',
   `update_user` varchar(200) COLLATE utf8_unicode_ci NOT NULL COMMENT '操作人',

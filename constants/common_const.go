@@ -31,6 +31,7 @@ const (
 	ERR_LOGIN_OUT                             = "退出登录失败"
 	ERR_VIDEO_NAME_CAN_NOT_BE_EMPTY           = "视频名称不能为空"
 	ERR_VIDEO_DESCRIBE_CAN_NOT_BE_EMPTY       = "视频描述不能为空"
+	ERR_VIDEO_COVER_CAN_NOT_BE_EMPTY          = "视频封面不能为空"
 	ERR_VIDEO_CLASSIFY_CAN_NOT_BE_EMPTY       = "视频分类不能为空"
 	ERR_VIDEO_FILE_CAN_NOT_BE_EMPTY           = "请至少上传一个视频文件"
 	ERR_ADD_VIDEO_FAIL                        = "添加视频失败"

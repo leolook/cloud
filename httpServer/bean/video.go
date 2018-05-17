@@ -4,6 +4,7 @@ type VideoBean struct {
 	Id         int64           `json:"id"`
 	Name       string          `json:"name"`
 	Info       string          `json:"info"`
+	Cover      string          `json:"cover"`
 	Classify   int64           `json:"classify" xorm:"classify_id"`
 	CreateTime int64           `json:"createTime" xorm:"create_time"`
 	UpdateUser string          `json:"updateUser" xorm:"update_user"`
