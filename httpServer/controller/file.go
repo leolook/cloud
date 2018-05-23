@@ -18,12 +18,12 @@ type File struct{}
 
 //上传文件
 func (File) Upload(c *gin.Context) {
-	tempFileName := c.PostForm(constants.HTTP_ADMIN_FILE_NAME)
 	tempFile, err := c.FormFile(constants.HTTP_ADMIN_FILE_FILE)
 	if err != nil {
 		logger.Error(fmt.Sprintf("File upload fail,err:%v", err))
 		return
 	}
+	tempFileName := tempFile.Filename
 	tempFileType := constants.OTHER_FILE_DIRECTORY
 	if strings.Index(tempFileName, ".") != -1 {
 		tempFileType = strings.Split(tempFileName, ".")[1]
