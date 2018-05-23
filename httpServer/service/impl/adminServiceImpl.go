@@ -16,19 +16,22 @@ type AdminServiceImpl struct{}
 func (impl *AdminServiceImpl) CheckLogin(userName, password string) interface{} {
 	logger.Info(fmt.Sprintf("userName:%s,password:%s", userName, password))
 	engine := db.GetEngine()
-	var userId string
-	isExist, err := engine.SQL(constants.ADMIN_LOGIN_CHECK_SQL, userName, password).Get(&userId)
+	var user bean.AdminUser
+	isExist, err := engine.SQL(constants.ADMIN_LOGIN_CHECK_SQL, userName, password).Get(&user)
 	if !isExist || err != nil {
 		logger.Warn(fmt.Sprintf("Find admin fail,isExist:%v,err:%v", isExist, err))
 		return nil
 	}
+	userId := fmt.Sprintf("%v", user.Id)
 	token := impl.createSession(userId, userName, password)
 	if token == constants.STR_IS_EMPTY {
 		return nil
 	}
 	data := bean.AdminLogin{
-		UserId: userId,
-		Token:  token,
+		UserId:   userId,
+		Token:    token,
+		FullName: user.FullName,
+		ImgPath:  user.ImgPath,
 	}
 	return data
 }

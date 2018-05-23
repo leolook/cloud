@@ -8,7 +8,7 @@ const (
 )
 
 const (
-	ADMIN_LOGIN_CHECK_SQL = "select id from " + TABLE_VIDEO_ADMIN + " where user_name=? and password=?"
+	ADMIN_LOGIN_CHECK_SQL = "select id,full_name,img_path from " + TABLE_VIDEO_ADMIN + " where user_name=? and password=?"
 
 	GET_LAST_ID_BY_INSERT_SQL = "SELECT LAST_INSERT_ID()"
 

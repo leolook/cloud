@@ -1,7 +1,7 @@
 package bean
 
 type VideoBean struct {
-	Id         int64           `json:"id"`
+	Id         int64           `json:"key"`
 	Name       string          `json:"name"`
 	Info       string          `json:"info"`
 	Cover      string          `json:"cover"`
