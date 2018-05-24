@@ -44,6 +44,11 @@ const (
 )
 
 const (
+	SUC_SUBMIT = "提交成功"
+	SUC_UPDATE = "修改成功"
+)
+
+const (
 	SUCCESS_DEL_FILE = "文件删除成功"
 )
 

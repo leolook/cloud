@@ -48,7 +48,7 @@ func (this Video) Add(c *gin.Context) {
 		c.JSON(http.StatusOK, response.GetResponse(constants.CODE_SYSTEM_ERROR, constants.ERR_ADD_VIDEO_FAIL))
 		return
 	}
-	c.JSON(http.StatusOK, response.GetSuccessResponse(nil))
+	c.JSON(http.StatusOK, response.GetSuccessResponse(constants.SUC_SUBMIT))
 }
 
 //编辑
@@ -96,7 +96,7 @@ func (this Video) Update(c *gin.Context) {
 		c.JSON(http.StatusOK, response.GetResponse(constants.CODE_SYSTEM_ERROR, constants.ERR_UPDATE_VIDEO_FAIL))
 		return
 	}
-	c.JSON(http.StatusOK, response.GetSuccessResponse(nil))
+	c.JSON(http.StatusOK, response.GetSuccessResponse(constants.SUC_UPDATE))
 }
 
 //分页列表

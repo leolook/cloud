@@ -4,6 +4,7 @@ import (
 	"cloud/common/flag"
 	"cloud/common/logger"
 	"cloud/constants"
+	"cloud/httpServer/bean"
 	"cloud/httpServer/response"
 	"fmt"
 	"github.com/gin-gonic/gin"
@@ -56,7 +57,11 @@ func (File) Upload(c *gin.Context) {
 		logger.Error(fmt.Sprintf("Copy file fail,err:%v", err))
 		return
 	}
-	c.JSON(http.StatusOK, response.GetSuccessResponse(path))
+	uploadFile := bean.UploadFile{
+		Path:       path,
+		CreateTime: time.Now().Unix(),
+	}
+	c.JSON(http.StatusOK, response.GetSuccessResponse(uploadFile))
 }
 
 //文件删除
