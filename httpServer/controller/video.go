@@ -80,6 +80,10 @@ func (this Video) Update(c *gin.Context) {
 		c.JSON(http.StatusOK, response.GetResponse(constants.CODE_PARAM_IS_WRONG, constants.ERR_PARAM_IS_WRONG))
 		return
 	}
+	if videoBean.Id <= 0 {
+		c.JSON(http.StatusOK, response.GetResponse(constants.CODE_PARAM_IS_WRONG, constants.ERR_PARAM_CAN_NOT_BE_EMPTY))
+		return
+	}
 	video, res := this.checkParams(c, &videoBean)
 	if res != nil {
 		c.JSON(http.StatusOK, res)

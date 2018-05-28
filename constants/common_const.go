@@ -65,3 +65,9 @@ const (
 	HTTP_ADMIN_FILE_FILE       = "file"
 	HTTP_ADMIN_VIDEO_ID        = "id"
 )
+
+const (
+	FORM_SUBMIT             = "application/x-www-form-urlencoded" //表单提交
+	APPLICATION_JSON_SUBMIT = "application/json;charset=UTF-8"    //application/json提交
+	CONTENT_TYPE            = "Content-Type"
+)
