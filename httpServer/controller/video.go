@@ -129,7 +129,7 @@ func (Video) checkParams(c *gin.Context, video *bean.VideoBean) (*bean.VideoBean
 	if video.Cover == constants.STR_IS_EMPTY {
 		return nil, response.GetResponse(constants.CODE_PARAM_IS_NULL, constants.ERR_VIDEO_COVER_CAN_NOT_BE_EMPTY)
 	}
-	if video.Classify == constants.INT_IS_ZERO {
+	if video.ClassifyId == constants.INT_IS_ZERO {
 		return nil, response.GetResponse(constants.CODE_PARAM_IS_NULL, constants.ERR_VIDEO_CLASSIFY_CAN_NOT_BE_EMPTY)
 	}
 	if len(video.Path) == constants.INT_IS_ZERO {

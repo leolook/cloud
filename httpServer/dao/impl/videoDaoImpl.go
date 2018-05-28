@@ -165,7 +165,7 @@ func (impl VideoDaoImpl) insertVideo(useId string, video *bean.VideoBean) bool {
 	if session == nil {
 		return false
 	}
-	_, err := impl.Tx.Exec(constants.ADMIN_VIDEO_FILE_INSERT_SQL, video.Name, video.Info, video.Cover, video.Classify, session.UserName)
+	_, err := impl.Tx.Exec(constants.ADMIN_VIDEO_FILE_INSERT_SQL, video.Name, video.Info, video.Cover, video.ClassifyId, session.UserName)
 	if err != nil {
 		logger.Error(fmt.Sprintf("Tx exec fail,err:%v", err))
 		impl.Tx.Rollback()
@@ -180,7 +180,7 @@ func (impl VideoDaoImpl) updateVideo(useId string, video *bean.VideoBean) bool {
 	if session == nil {
 		return false
 	}
-	_, err := impl.Tx.Exec(constants.ADMIN_VIDEO_FILE_UPDATE_SQL, video.Name, video.Info, video.Cover, video.Classify, session.UserName, video.Id)
+	_, err := impl.Tx.Exec(constants.ADMIN_VIDEO_FILE_UPDATE_SQL, video.Name, video.Info, video.Cover, video.ClassifyId, session.UserName, video.Id)
 	if err != nil {
 		logger.Error(fmt.Sprintf("Tx exec fail,err:%v", err))
 		impl.Tx.Rollback()
