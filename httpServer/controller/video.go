@@ -94,6 +94,10 @@ func (this Video) Update(c *gin.Context) {
 		c.JSON(http.StatusOK, response.GetResponse(constants.CODE_PARAM_IS_REPEAT, constants.ERR_ADD_VIDEO_REPEAT))
 		return
 	}
+	//if !this.checkUpdated(*beforeVideo, videoBean) { //数据没有发生变化，不进行数据库层操作
+	//	c.JSON(http.StatusOK, response.GetSuccessResponse(constants.SUC_UPDATE))
+	//	return
+	//}
 	userId := c.GetHeader(constants.HTTP_HEADER_USER_ID)
 	success := videoService.AddOrUpdate(userId, video)
 	if !success {
@@ -141,3 +145,5 @@ func (Video) checkParams(c *gin.Context, video *bean.VideoBean) (*bean.VideoBean
 	}
 	return video, nil
 }
+
+

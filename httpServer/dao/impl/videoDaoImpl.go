@@ -54,21 +54,38 @@ func (impl VideoDaoImpl) Insert(useId string, video *bean.VideoBean) bool {
 
 //修改video
 func (impl VideoDaoImpl) Update(useId string, video *bean.VideoBean) bool {
-	info := impl.GetVideoInfo(video.Id)
-	if info != nil {
-		logger.Info(fmt.Sprintf("video info:%v", *info))
+	before := impl.GetVideoInfo(video.Id)
+	if before == nil {
+		logger.Error(fmt.Sprintf("Not found data,video->id:%v", before.Id))
+		return false
 	}
-
+	paths := impl.GetVideoPathInfo(video.Id)
+	if paths == nil || len(paths) == 0 {
+		logger.Error(fmt.Sprintf("Not found data,video->id:%v", before.Id))
+		return false
+	}
+	before.Path = paths
+	if !impl.checkUpdated(before, video) { //修改的数据没有发生变化
+		logger.Info(fmt.Sprintf("data not changed"))
+		return true
+	}
 	tx := db.GetEngine().NewSession()
+	defer tx.Close()
 	impl.Tx = tx
-	if !impl.updateVideo(useId, video) {
-		return false
+	if impl.checkUpdated(before, video) { //修改的数据发生变化
+		logger.Info(fmt.Sprintf("video changed"))
+		if !impl.updateVideo(useId, video) {
+			return false
+		}
 	}
-	if !impl.delVideoPath(video.Id) {
-		return false
-	}
-	if !impl.insertVideoPath(video) {
-		return false
+	if impl.checkPathsUpdated(before, video) { //文件路径数据发生变化
+		logger.Info(fmt.Sprintf("video paths changed"))
+		if !impl.delVideoPath(video.Id) {
+			return false
+		}
+		if !impl.insertVideoPath(video) {
+			return false
+		}
 	}
 	err := tx.Commit()
 	if err != nil {
@@ -211,4 +228,49 @@ func (impl VideoDaoImpl) insertVideoPath(video *bean.VideoBean) bool {
 		}
 	}
 	return true
+}
+
+//修改之前判断数据是否改动过
+func (impl VideoDaoImpl) checkUpdated(before, after *bean.VideoBean) bool {
+	if before.Name != after.Name {
+		return true
+	}
+	if before.Info != after.Info {
+		return true
+	}
+	if before.ClassifyId != after.ClassifyId {
+		return true
+	}
+	if before.Cover != after.Cover {
+		return true
+	}
+	return false
+}
+
+//修改之前判断文件路径是否改动过
+func (impl VideoDaoImpl) checkPathsUpdated(before, after *bean.VideoBean) bool {
+	beforeSize := len(before.Path)
+	afterSize := len(after.Path)
+	if beforeSize != afterSize {
+		return true
+	} else {
+		var check bool = false
+		afterMap := impl.paths2Map(after.Path)
+		for i := 0; i < beforeSize; i++ {
+			if _, ok := afterMap[before.Path[i].Path]; !ok {
+				check = true
+				break
+			}
+		}
+		return check
+	}
+	return false
+}
+
+func (impl VideoDaoImpl) paths2Map(paths []bean.VideoPathBean) map[string]string {
+	mp := make(map[string]string)
+	for i := 0; i < len(paths); i++ {
+		mp[paths[i].Path] = paths[i].Path
+	}
+	return mp
 }
