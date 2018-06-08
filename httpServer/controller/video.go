@@ -140,10 +140,16 @@ func (Video) checkParams(c *gin.Context, video *bean.VideoBean) (*bean.VideoBean
 	if video.ClassifyId == constants.INT_IS_ZERO {
 		return nil, rsp.NewRsp(constants.CODE_PARAM_IS_NULL, constants.ERR_VIDEO_CLASSIFY_CAN_NOT_BE_EMPTY)
 	}
+	path := make([]bean.VideoPathBean, 0)
+	for _, v := range video.Path {
+		if v.Path == constants.STR_IS_EMPTY || v.Number == constants.INT_IS_ZERO || v.CreateTime == constants.INT_IS_ZERO {
+			continue
+		}
+		path = append(path, v)
+	}
+	video.Path = path
 	if len(video.Path) == constants.INT_IS_ZERO {
 		return nil, rsp.NewRsp(constants.CODE_PARAM_IS_NULL, constants.ERR_VIDEO_FILE_CAN_NOT_BE_EMPTY)
 	}
 	return video, nil
 }
-
-

@@ -65,10 +65,10 @@ func (impl VideoDaoImpl) Update(useId string, video *bean.VideoBean) bool {
 		return false
 	}
 	before.Path = paths
-	if !impl.checkUpdated(before, video) { //修改的数据没有发生变化
-		logger.Info(fmt.Sprintf("data not changed"))
-		return true
-	}
+	//if !impl.checkUpdated(before, video) { //修改的数据没有发生变化
+	//	logger.Info(fmt.Sprintf("data not changed"))
+	//	return true
+	//}
 	tx := db.GetEngine().NewSession()
 	defer tx.Close()
 	impl.Tx = tx
@@ -78,6 +78,7 @@ func (impl VideoDaoImpl) Update(useId string, video *bean.VideoBean) bool {
 			return false
 		}
 	}
+	logger.Info(before, video)
 	if impl.checkPathsUpdated(before, video) { //文件路径数据发生变化
 		logger.Info(fmt.Sprintf("video paths changed"))
 		if !impl.delVideoPath(video.Id) {
