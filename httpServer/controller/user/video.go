@@ -4,7 +4,7 @@ import (
 	"cloud/common/logger"
 	"cloud/constants"
 	"cloud/httpServer/bean"
-	"cloud/httpServer/response"
+	"cloud/httpServer/rsp"
 	"cloud/httpServer/service"
 	"cloud/httpServer/service/impl"
 	"fmt"
@@ -28,13 +28,13 @@ func (Video) List(c *gin.Context) {
 	err := c.Bind(&req)
 	if err != nil {
 		logger.Error(fmt.Sprintf("Bind fail,err:%v", err))
-		c.JSON(http.StatusOK, response.GetResponse(constants.CODE_PARAM_IS_WRONG, constants.ERR_PARAM_IS_WRONG))
+		c.JSON(http.StatusOK, rsp.NewRsp(constants.CODE_PARAM_IS_WRONG, constants.ERR_PARAM_IS_WRONG))
 		return
 	}
 	data := videoService.UserListByPage(req)
 	if data == nil {
-		c.JSON(http.StatusOK, response.GetResponse(constants.CODE_SYSTEM_ERROR, constants.ERR_LIST_BY_PAGE_FAIL))
+		c.JSON(http.StatusOK, rsp.NewRsp(constants.CODE_SYSTEM_ERROR, constants.ERR_LIST_BY_PAGE_FAIL))
 		return
 	}
-	c.JSON(http.StatusOK, response.GetSuccessResponse(data))
+	c.JSON(http.StatusOK, rsp.NewSucRsp(data))
 }

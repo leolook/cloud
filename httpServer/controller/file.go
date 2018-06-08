@@ -5,7 +5,7 @@ import (
 	"cloud/common/logger"
 	"cloud/constants"
 	"cloud/httpServer/bean"
-	"cloud/httpServer/response"
+	"cloud/httpServer/rsp"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"io"
@@ -61,27 +61,27 @@ func (File) Upload(c *gin.Context) {
 		Path:       path,
 		CreateTime: time.Now().Unix(),
 	}
-	c.JSON(http.StatusOK, response.GetSuccessResponse(uploadFile))
+	c.JSON(http.StatusOK, rsp.NewSucRsp(uploadFile))
 }
 
 //文件删除
 func (File) DelFile(c *gin.Context) {
 	path := c.Query(constants.HTTP_ADMIN_FILE_PATH)
 	if path == constants.STR_IS_EMPTY {
-		c.JSON(http.StatusOK, response.GetResponse(constants.CODE_PARAM_IS_NULL, constants.ERR_FILE_PATH_CAN_NOT_BE_EMPTY))
+		c.JSON(http.StatusOK, rsp.NewRsp(constants.CODE_PARAM_IS_NULL, constants.ERR_FILE_PATH_CAN_NOT_BE_EMPTY))
 		return
 	}
 	if !checkFileIsExist(path) {
-		c.JSON(http.StatusOK, response.GetResponse(constants.CODE_PARAM_IS_WRONG, constants.ERR_FILE_PATH_IS_NOT_EXIST))
+		c.JSON(http.StatusOK, rsp.NewRsp(constants.CODE_PARAM_IS_WRONG, constants.ERR_FILE_PATH_IS_NOT_EXIST))
 		return
 	}
 	err := os.Remove(path)
 	if err != nil {
 		logger.Error(fmt.Sprintf("Del file fail,err:%v", err))
-		c.JSON(http.StatusOK, response.GetResponse(constants.CODE_SYSTEM_ERROR, constants.ERR_SYSTEM_ERROR))
+		c.JSON(http.StatusOK, rsp.NewRsp(constants.CODE_SYSTEM_ERROR, constants.ERR_SYSTEM_ERROR))
 		return
 	}
-	c.JSON(http.StatusOK, response.GetSuccessResponse(constants.SUCCESS_DEL_FILE))
+	c.JSON(http.StatusOK, rsp.NewSucRsp(constants.SUCCESS_DEL_FILE))
 }
 
 //判断文件是否存在

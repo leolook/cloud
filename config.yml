@@ -13,5 +13,5 @@ http:
 mysql:
   addr: 127.0.0.1:3306
   user: root
-  password: icsoc
+  password: root
   database: video

@@ -1,7 +1,7 @@
 package controller
 
 import (
-	"cloud/httpServer/response"
+	"cloud/httpServer/rsp"
 	"cloud/httpServer/service"
 	"cloud/httpServer/service/impl"
 	"github.com/gin-gonic/gin"
@@ -21,5 +21,5 @@ func init() {
 //获取所有分类
 func (the Classify) All(c *gin.Context) {
 	data := classifyService.All()
-	c.JSON(http.StatusOK, response.GetSuccessResponse(data))
+	c.JSON(http.StatusOK, rsp.NewSucRsp(data))
 }

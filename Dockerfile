@@ -1,0 +1,7 @@
+FROM mac
+
+MAINTAINER hwt
+
+EXPOSE 8010
+
+ENTRYPOINT ["cloud"]
