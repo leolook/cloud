@@ -72,7 +72,7 @@ func (File) DelFile(c *gin.Context) {
 		return
 	}
 	if !checkFileIsExist(path) {
-		c.JSON(http.StatusOK, rsp.NewRsp(constants.CODE_PARAM_IS_WRONG, constants.ERR_FILE_PATH_IS_NOT_EXIST))
+		c.JSON(http.StatusOK, rsp.NewSucRsp(constants.SUCCESS_DEL_FILE))
 		return
 	}
 	err := os.Remove(path)
