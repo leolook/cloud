@@ -71,3 +71,9 @@ const (
 	APPLICATION_JSON_SUBMIT = "application/json;charset=UTF-8"    //application/json提交
 	CONTENT_TYPE            = "Content-Type"
 )
+
+const (
+	IMG_FILE   = 1
+	VIDEO_FILE = 2
+	OTHER_FILE = 3
+)

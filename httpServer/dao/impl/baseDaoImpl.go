@@ -11,11 +11,11 @@ import (
 
 type BaseDaoImpl struct{}
 
-//保存或者更新
-func (impl BaseDaoImpl) SaveOrUpdate(sqlStr string, args ...interface{}) bool {
+//执行sql,保存、删除、更新
+func (impl BaseDaoImpl) Execute(sqlStr string, args ...interface{}) bool {
 	result, err := db.GetEngine().Exec(sqlStr, args)
 	if err != nil {
-		logger.Error(fmt.Sprintf("SaveOrUpdate fail,[err=%v] [result=%v]", err, result))
+		logger.Error(fmt.Sprintf("Execute fail,[err=%v] [result=%v]", err, result))
 		return false
 	}
 	rows, err := result.RowsAffected()

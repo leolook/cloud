@@ -1,97 +1,54 @@
 package controller
 
 import (
-	"cloud/common/flag"
 	"cloud/common/logger"
 	"cloud/constants"
-	"cloud/httpServer/bean"
 	"cloud/httpServer/rsp"
+	"cloud/httpServer/service"
+	"cloud/httpServer/service/impl"
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"io"
-	"net/http"
-	"os"
-	"strings"
-	"time"
 )
 
 type File struct{}
+
+var fileSrv service.FileSrvIntf
+
+func init() {
+	fileSrv = new(impl.FileSrvImpl)
+}
 
 //上传文件
 func (File) Upload(c *gin.Context) {
 	tempFile, err := c.FormFile(constants.HTTP_ADMIN_FILE_FILE)
 	if err != nil {
 		logger.Error(fmt.Sprintf("File upload fail,err:%v", err))
+		rsp.NewRsp(constants.CODE_SYSTEM_ERROR, "service err").Reply(c)
 		return
 	}
-	tempFileName := tempFile.Filename
-	tempFileType := constants.OTHER_FILE_DIRECTORY
-	if strings.Index(tempFileName, ".") != -1 {
-		tempFileType = strings.Split(tempFileName, ".")[1]
-	}
-	folder := time.Now().Format(constants.TIME_FORMAT_Y_M_D)
-	path := fmt.Sprintf("%s/%s/%s", flag.FilePath, folder, tempFileType)
-	if err := os.MkdirAll(path, os.ModePerm); err != nil { //生成多级目录
-		logger.Error(fmt.Sprintf("Mkdir folder fail,err:%v", err))
-		return
-	}
-	fileName := fmt.Sprintf("%v", time.Now().Unix())
-	if tempFileType != constants.OTHER_FILE_DIRECTORY {
-		fileName = fmt.Sprintf("/%v.%s", fileName, tempFileType)
-	}
-	path += fileName
-	newFile, err := os.Create(path)
+	uploadFile, err := fileSrv.Upload(tempFile)
 	if err != nil {
-		logger.Error(fmt.Sprintf("Create file fail,err:%v,path:%s", err, path))
+		rsp.NewRsp(constants.CODE_SYSTEM_ERROR, "service err").Reply(c)
 		return
 	}
-	defer newFile.Close()
-	temp, err := tempFile.Open()
-	if err != nil {
-		logger.Error(fmt.Sprintf("TempFile open fail,err:%v", err))
-		return
-	}
-	defer temp.Close()
-	_, err = io.Copy(newFile, temp)
-	if err != nil {
-		logger.Error(fmt.Sprintf("Copy file fail,err:%v", err))
-		return
-	}
-	uploadFile := bean.UploadFile{
-		Path:       path,
-		CreateTime: time.Now().Unix(),
-	}
-	c.JSON(http.StatusOK, rsp.NewSucRsp(uploadFile))
+	rsp.NewSucRsp(uploadFile).Reply(c)
 }
 
 //文件删除
 func (File) DelFile(c *gin.Context) {
 	path := c.Query(constants.HTTP_ADMIN_FILE_PATH)
 	if path == constants.STR_IS_EMPTY {
-		c.JSON(http.StatusOK, rsp.NewRsp(constants.CODE_PARAM_IS_NULL, constants.ERR_FILE_PATH_CAN_NOT_BE_EMPTY))
+		rsp.NewRsp(constants.CODE_PARAM_IS_NULL, constants.ERR_FILE_PATH_CAN_NOT_BE_EMPTY).Reply(c)
 		return
 	}
-	if !checkFileIsExist(path) {
-		c.JSON(http.StatusOK, rsp.NewSucRsp(constants.SUCCESS_DEL_FILE))
+	if !fileSrv.IsExist(path) {
+		rsp.NewSucRsp(constants.SUCCESS_DEL_FILE).Reply(c)
 		return
 	}
-	err := os.Remove(path)
+	err := fileSrv.Del(path)
 	if err != nil {
-		logger.Error(fmt.Sprintf("Del file fail,err:%v", err))
-		c.JSON(http.StatusOK, rsp.NewRsp(constants.CODE_SYSTEM_ERROR, constants.ERR_SYSTEM_ERROR))
+		rsp.NewRsp(constants.CODE_SYSTEM_ERROR, constants.ERR_SYSTEM_ERROR).Reply(c)
 		return
 	}
-	c.JSON(http.StatusOK, rsp.NewSucRsp(constants.SUCCESS_DEL_FILE))
-}
-
-//判断文件是否存在
-func checkFileIsExist(path string) bool {
-	_, err := os.Stat(path)
-	if err == nil {
-		return true
-	}
-	if os.IsNotExist(err) {
-		return false
-	}
-	return true
+	rsp.NewSucRsp(constants.SUCCESS_DEL_FILE).Reply(c)
 }

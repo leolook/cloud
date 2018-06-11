@@ -13,5 +13,5 @@ type RealFile struct {
 type RealFilePage struct {
 	BasePageReq
 	FileType   int `json:"fileType"`
-	IsRelative int `json:"isRelative"`
+	IsRelative bool `json:"isRelative"`
 }
