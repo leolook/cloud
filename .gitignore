@@ -10,3 +10,4 @@ config.yml
 pkg/**
 cloud
 file
+go_build_main_go
