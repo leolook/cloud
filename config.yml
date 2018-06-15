@@ -1,17 +1,17 @@
 #redis 配置192.168.96.140:6379
 db:
   password:
-  addr:   127.0.0.1:6379
+  addr:   192.168.1.107:6379
   user: 
   database: 1
 
 #httpServer
 http:
-  addr:   127.0.0.1:8010
+  addr:   0.0.0.0:8010
 
 #mysql
 mysql:
-  addr: 127.0.0.1:3306
+  addr: 192.168.1.107:3306
   user: root
   password: root
   database: video

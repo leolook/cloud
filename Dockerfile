@@ -1,7 +1,3 @@
-FROM mac
-
-MAINTAINER hwt
-
-EXPOSE 8010
-
-ENTRYPOINT ["cloud"]
+FROM scratch
+COPY main /
+CMD ["/main"]

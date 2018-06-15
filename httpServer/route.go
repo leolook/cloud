@@ -7,6 +7,7 @@ import (
 	"cloud/httpServer/controller/user"
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 //请求url
@@ -34,6 +35,10 @@ func StartUpServer() {
 	route := gin.Default()
 	route.Static(fmt.Sprintf("%s/%s", HEAD, flag.FilePath), flag.FilePath) //对外放开静态文件
 	route.GET(PING, controller.Network{}.Ping)
+	route.GET("/metrics", func(c *gin.Context) {
+		h := promhttp.Handler()
+		h.ServeHTTP(c.Writer, c.Request)
+	})
 	//后端
 	admin := route.Group(ADMIN)
 	admin.POST(ADMIN_LOGIN, controller.Admin{}.Login)
