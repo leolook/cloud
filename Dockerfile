@@ -1,3 +1,5 @@
 FROM scratch
-COPY main /
-CMD ["/main"]
+MAINTAINER hwt
+LABEL cloud 1.0
+COPY /main /bin
+CMD ["/bin"]

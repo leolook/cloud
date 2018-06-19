@@ -2,7 +2,6 @@ package httpServer
 
 import (
 	"cloud/common/config"
-	"cloud/common/flag"
 	"cloud/httpServer/controller"
 	"cloud/httpServer/controller/user"
 	"fmt"
@@ -33,7 +32,8 @@ const (
 func StartUpServer() {
 	gin.SetMode(gin.ReleaseMode)
 	route := gin.Default()
-	route.Static(fmt.Sprintf("%s/%s", HEAD, flag.FilePath), flag.FilePath) //对外放开静态文件
+	filePath := config.GetConf().UploadFile.Path
+	route.Static(fmt.Sprintf("%s/%s", HEAD, filePath), filePath) //对外放开静态文件
 	route.GET(PING, controller.Network{}.Ping)
 	route.GET("/metrics", func(c *gin.Context) {
 		h := promhttp.Handler()

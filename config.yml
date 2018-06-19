@@ -7,7 +7,7 @@ db:
 
 #httpServer
 http:
-  addr:   0.0.0.0:8010
+  addr:   0.0.0.0:8080
 
 #mysql
 mysql:
@@ -15,3 +15,7 @@ mysql:
   user: root
   password: root
   database: video
+
+#upload file address
+uploadfile:
+  path: file

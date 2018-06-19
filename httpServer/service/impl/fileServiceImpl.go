@@ -1,7 +1,7 @@
 package impl
 
 import (
-	"cloud/common/flag"
+	"cloud/common/config"
 	"cloud/common/logger"
 	"cloud/constants"
 	"cloud/httpServer/bean"
@@ -23,7 +23,7 @@ func (impl FileSrvImpl) Upload(tempFile *multipart.FileHeader) (*bean.UploadFile
 		tempFileType = strings.Split(tempFileName, ".")[1]
 	}
 	folder := time.Now().Format(constants.TIME_FORMAT_Y_M_D)
-	path := fmt.Sprintf("%s/%s/%s", flag.FilePath, folder, tempFileType)
+	path := fmt.Sprintf("%s/%s/%s", config.GetConf().UploadFile.Path, folder, tempFileType)
 	if err := os.MkdirAll(path, os.ModePerm); err != nil { //生成多级目录
 		logger.Error(fmt.Sprintf("Mkdir folder fail,err:%v", err))
 		return nil, err

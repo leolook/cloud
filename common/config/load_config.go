@@ -27,6 +27,10 @@ type AppConfig struct {
 		Password string
 		Database string
 	}
+
+	UploadFile struct {
+		Path string
+	}
 }
 
 var conf AppConfig
@@ -47,10 +51,11 @@ func init() {
 	for k, v := range os.Args {
 		logger.Info(fmt.Sprintf("k:%d, v:%s", k, v))
 	}
-	logger.Info(fmt.Sprintf("load config path %s", confPath))
-	logger.Info("redis addr:", conf.Db.Addr)
+	logger.Info(fmt.Sprintf("load config path: %s", confPath))
+	logger.Info(fmt.Sprintf("redis addr:%s", conf.Db.Addr))
 	logger.Info(fmt.Sprintf("httpServer addr:%s", conf.Http.Addr))
 	logger.Info(fmt.Sprintf("mysql:%v", conf.Mysql))
+	logger.Info(fmt.Sprintf("upload file path:%v", conf.UploadFile))
 }
 
 func GetConf() AppConfig {
