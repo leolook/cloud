@@ -47,11 +47,13 @@ func CheckToken(c *gin.Context) {
 	logger.Info(fmt.Sprintf("userId:%s,token:%s", userId, token))
 	if userId == constants.STR_IS_EMPTY || token == constants.STR_IS_EMPTY {
 		rsp.NewRsp(constants.CODE_TOKEN_INVALID, nil).Reply(c)
+		c.Abort()
 		return
 	}
 	suc := adminService.CheckSession(userId, token)
 	if !suc {
 		rsp.NewRsp(constants.CODE_TOKEN_INVALID, nil).Reply(c)
+		c.Abort()
 		return
 	}
 	logRequest(c)

@@ -1,6 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"log"
+	"strings"
+)
 
 type Srv interface {
 	Print(data string)
@@ -19,5 +23,17 @@ func Test_1() Srv {
 }
 
 func main() {
-    Test_1().Print("hwt")
+	//Test_1().Print("hwt")
+
+	str := ""
+	for i := 0; i < 3; i++ {
+		str = strings.Join([]string{str}, ",")
+	}
+	log.Println(str)
+
+	var st *int = nil
+
+	var h int = *st
+
+	log.Println(h)
 }

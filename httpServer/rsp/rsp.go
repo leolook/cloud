@@ -22,5 +22,4 @@ func NewSucRsp(data interface{}) *Rsp {
 
 func (r *Rsp) Reply(c *gin.Context) {
 	c.JSON(http.StatusOK, r)
-	c.Abort()
 }

@@ -1,22 +1,34 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"log"
+	"os"
+)
 
 func main() {
-	ch := make(chan int)
-	go func() {
-		for {
-			c:= <-ch
-			fmt.Println(c)
-		}
-	}()
+	pid := os.Getpid()
+	log.Println(pid)
+	CalculateFd(fmt.Sprintf("%v", pid))
+}
 
-	ch <- 0
-	for i:=0;i<10;i++{
-		if i==11{
-			fmt.Println(i)
-			return
-		}
+func CalculateFd(pid string) (fdNum uint, err error) {
+	path := "/proc/" + pid + "/fd/"
+
+	file, err := os.Open(path)
+	if err != nil || nil == file {
+		log.Println(err)
+		return
 	}
-	fmt.Println(1111111)
+	defer file.Close()
+
+	files, err := file.Readdirnames(0)
+
+	if err != nil {
+		return
+	}
+
+	fdNum = uint(len(files))
+
+	return
 }
