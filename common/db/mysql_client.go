@@ -10,7 +10,7 @@ import (
 
 var engine *xorm.Engine
 
-func getEngineClient() error {
+func GetEngineClient() error {
 	if engine == nil {
 		var err error
 		mysqlConf := config.GetConf().Mysql
@@ -25,14 +25,14 @@ func getEngineClient() error {
 			logger.Error(fmt.Sprintf("Ping mysql server err:%v", err))
 			return err
 		}
-		engine.ShowSQL(true)
+		//engine.ShowSQL(true)
 	}
 	return nil
 }
 
 func GetEngine() *xorm.Engine {
 	if engine == nil {
-		getEngineClient()
+		GetEngineClient()
 	}
 	return engine
 }
