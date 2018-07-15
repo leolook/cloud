@@ -1,7 +1,7 @@
 package controller
 
 import (
-	"cloud/common/logger"
+	logger "github.com/alecthomas/log4go"
 	"cloud/constants"
 	"cloud/httpServer/rsp"
 	"cloud/httpServer/service"

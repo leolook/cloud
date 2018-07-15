@@ -9,6 +9,30 @@
 			"revisionTime": "2017-06-26T11:06:00Z"
 		},
 		{
+			"checksumSHA1": "PLYRsSaqhSKrGIuxWkV+B9uMUL8=",
+			"path": "github.com/alecthomas/log4go",
+			"revision": "d146e6b86faab5f7e4d135cc63b749d74bf0d4a6",
+			"revisionTime": "2018-01-09T08:25:32Z"
+		},
+		{
+			"checksumSHA1": "M9tpgfbkX6FKaXU/Ta+V2KNh9oI=",
+			"path": "github.com/baseserver/gin",
+			"revision": "577369b4f6d1cf1ffebd99b5ed9220e8981bd0d1",
+			"revisionTime": "2018-07-15T07:08:46Z"
+		},
+		{
+			"checksumSHA1": "fbBwy3G7JYU7z3hCXJgVAfhIFkE=",
+			"path": "github.com/baseserver/protocol",
+			"revision": "577369b4f6d1cf1ffebd99b5ed9220e8981bd0d1",
+			"revisionTime": "2018-07-15T07:08:46Z"
+		},
+		{
+			"checksumSHA1": "wjlhe29zWdfzDrSgRTl5VU2DfLE=",
+			"path": "github.com/baseserver/util",
+			"revision": "577369b4f6d1cf1ffebd99b5ed9220e8981bd0d1",
+			"revisionTime": "2018-07-15T07:08:46Z"
+		},
+		{
 			"checksumSHA1": "0rido7hYHQtfq3UJzVT5LClLAWc=",
 			"path": "github.com/beorn7/perks/quantile",
 			"revision": "3a771d992973f24aa725d07868b467d1ddfceafb",
@@ -31,6 +55,12 @@
 			"path": "github.com/gin-gonic/gin/binding",
 			"revision": "22ee916dfecdaabe7b541b7f76bdc8c64e99c145",
 			"revisionTime": "2017-07-05T16:25:37Z"
+		},
+		{
+			"checksumSHA1": "woO1qIxIeQ1bcbPSiMfAKk3r4xg=",
+			"path": "github.com/gin-gonic/gin/json",
+			"revision": "caf3e350a548af1add9def68087ac53d1d000caa",
+			"revisionTime": "2018-05-31T06:13:40Z"
 		},
 		{
 			"checksumSHA1": "guIVY1IRmjYd5O3DOAcfjTVpeWo=",

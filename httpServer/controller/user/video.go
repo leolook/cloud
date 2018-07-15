@@ -1,7 +1,7 @@
 package user
 
 import (
-	"cloud/common/logger"
+	logger "github.com/alecthomas/log4go"
 	"cloud/constants"
 	"cloud/httpServer/bean"
 	"cloud/httpServer/rsp"

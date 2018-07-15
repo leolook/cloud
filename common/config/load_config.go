@@ -2,7 +2,7 @@ package config
 
 import (
 	"cloud/common/flag"
-	"cloud/common/logger"
+	logger "github.com/alecthomas/log4go"
 	"fmt"
 	"github.com/jinzhu/configor"
 	"os"

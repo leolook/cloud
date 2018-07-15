@@ -2,7 +2,7 @@ package db
 
 import (
 	"cloud/common/config"
-	"cloud/common/logger"
+	logger "github.com/alecthomas/log4go"
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/go-xorm/xorm"

@@ -1,7 +1,7 @@
 package impl
 
 import (
-	"cloud/common/logger"
+	logger "github.com/alecthomas/log4go"
 	"cloud/common/util"
 	"cloud/httpServer/bean"
 	"cloud/httpServer/dao"

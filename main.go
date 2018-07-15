@@ -2,7 +2,7 @@ package main
 
 import (
 	"cloud/common/db"
-	"cloud/common/logger"
+	logger "github.com/alecthomas/log4go"
 	"cloud/httpServer"
 	"fmt"
 	"os"

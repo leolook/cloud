@@ -1,39 +1,59 @@
 package main
 
-import (
-	"fmt"
-	"log"
-	"strings"
+import "fmt"
+
+type Render interface {
+	Eat(data string)
+}
+
+type People interface {
+	Instance(name, data string) Render
+}
+
+type (
+	Child struct {
+		Name string
+		Age  int64
+	}
+
+	Old struct {
+		Name string
+	}
 )
 
-type Srv interface {
-	Print(data string)
-}
-
-type Func func(data string)
-
-func (f Func) Print(data string) {
-	f(data)
-}
-
-func Test_1() Srv {
-	return Func(func(data string) {
-		fmt.Println("Test_1:", data)
-	})
-}
-
-func main() {
-	//Test_1().Print("hwt")
-
-	str := ""
-	for i := 0; i < 3; i++ {
-		str = strings.Join([]string{str}, ",")
+func (r Child) Instance(name, data string) Render {
+	return Child{
+		Name: "j",
+		Age:  1,
 	}
-	log.Println(str)
+}
 
-	var st *int = nil
+func (r Child) Eat(data string) {
+	fmt.Println(r.Name, "==>", r.Age)
+}
 
-	var h int = *st
+func (r Old) Instance(name, data string) Render {
+	return Old{
+		Name: "j",
+	}
+}
 
-	log.Println(h)
+func (r Old) Eat(data string) {
+	fmt.Println(r.Name)
+}
+
+type Do struct {
+	Render People
+}
+
+func (d Do) Do(name, data string) {
+	r := d.Render.Instance(name, data)
+	r.Eat(data)
+}
+func main() {
+	do := Do{
+		Render: Old{},
+	}
+
+	do.Do("nihao", "huhu")
 }

@@ -2,7 +2,7 @@ package impl
 
 import (
 	"cloud/common/db"
-	"cloud/common/logger"
+	logger "github.com/alecthomas/log4go"
 	"cloud/constants"
 	"cloud/httpServer/bean"
 	"fmt"

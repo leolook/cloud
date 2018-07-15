@@ -1,60 +1,31 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
+	"fmt"
+	"reflect"
 )
 
-var DB = make(map[string]string)
-
-func setupRouter() *gin.Engine {
-	// Disable Console Color
-	// gin.DisableConsoleColor()
-	r := gin.Default()
-
-	// Ping test
-	r.GET("/ping", func(c *gin.Context) {
-		c.String(200, "pong")
-	})
-
-	// Get user value
-	r.GET("/user", func(c *gin.Context) {
-		user := c.Query("name")
-		value, ok := DB[user]
-		if ok {
-			c.JSON(200, gin.H{"user": user, "value": value})
-		} else {
-			c.JSON(200, gin.H{"user": user, "status": "no value"})
-		}
-	})
-
-	authorized := r.Group("/", gin.BasicAuth(gin.Accounts{
-		"foo":  "bar", // user:foo password:bar
-		"manu": "123", // user:manu password:123
-	}))
-
-	authorized.POST("admin", func(c *gin.Context) {
-		user := c.MustGet(gin.AuthUserKey).(string)
-
-		// Parse JSON
-		var json struct {
-			Value string `json:"value" binding:"required"`
-		}
-
-		if c.Bind(&json) == nil {
-			DB[user] = json.Value
-			c.JSON(200, gin.H{"status": "ok"})
-		}
-	})
-
-	return r
+func main() {
+	tonydon := &User{Name: "TangXiaodong", Age: 100, Id: "0000123"}
+	object := reflect.ValueOf(tonydon)
+	myref := object.Elem()
+	typeOfType := myref.Type()
+	for i := 0; i < myref.NumField(); i++ {
+		field := myref.Field(i)
+		fmt.Printf("%d. %s %s = %v \n", i, typeOfType.Field(i).Name, field.Type(), field.Interface())
+	}
+	tonydon.SayHello()
+	v := object.MethodByName("SayHello")
+	v.Call([]reflect.Value{})
 }
 
-func main() {
+type User struct {
+	Name string
+	Age  int
+	Id   string
+	Arr  []string
+}
 
-	gin.SetMode(gin.ReleaseMode)
-	r := setupRouter()
-	// Listen and Server in 0.0.0.0:8080
-	r.Run(":8080")
-
-
+func (u *User) SayHello() {
+	fmt.Println("I'm " + u.Name + ", Id is " + u.Id + ". Nice to meet you! ")
 }
