@@ -1,7 +1,6 @@
 package middle
 
 import (
-	//log "cloud/common/test"
 	pb "cloud/shelves/protocol"
 	"reflect"
 )
