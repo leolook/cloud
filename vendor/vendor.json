@@ -15,24 +15,6 @@
 			"revisionTime": "2018-01-09T08:25:32Z"
 		},
 		{
-			"checksumSHA1": "M9tpgfbkX6FKaXU/Ta+V2KNh9oI=",
-			"path": "github.com/baseserver/gin",
-			"revision": "577369b4f6d1cf1ffebd99b5ed9220e8981bd0d1",
-			"revisionTime": "2018-07-15T07:08:46Z"
-		},
-		{
-			"checksumSHA1": "fbBwy3G7JYU7z3hCXJgVAfhIFkE=",
-			"path": "github.com/baseserver/protocol",
-			"revision": "577369b4f6d1cf1ffebd99b5ed9220e8981bd0d1",
-			"revisionTime": "2018-07-15T07:08:46Z"
-		},
-		{
-			"checksumSHA1": "wjlhe29zWdfzDrSgRTl5VU2DfLE=",
-			"path": "github.com/baseserver/util",
-			"revision": "577369b4f6d1cf1ffebd99b5ed9220e8981bd0d1",
-			"revisionTime": "2018-07-15T07:08:46Z"
-		},
-		{
 			"checksumSHA1": "0rido7hYHQtfq3UJzVT5LClLAWc=",
 			"path": "github.com/beorn7/perks/quantile",
 			"revision": "3a771d992973f24aa725d07868b467d1ddfceafb",
@@ -67,6 +49,24 @@
 			"path": "github.com/gin-gonic/gin/render",
 			"revision": "22ee916dfecdaabe7b541b7f76bdc8c64e99c145",
 			"revisionTime": "2017-07-05T16:25:37Z"
+		},
+		{
+			"checksumSHA1": "/yvy4ebtt9WGMAXMYjZD0QPgcA8=",
+			"path": "github.com/gitbubhwt/baseserver/gin",
+			"revision": "e5c659e1094ab8915c225a08d82e25bc38f5948d",
+			"revisionTime": "2018-07-16T13:13:48Z"
+		},
+		{
+			"checksumSHA1": "u2b48b6EYjW1L5iSgF6Y1oI1tOg=",
+			"path": "github.com/gitbubhwt/baseserver/protocol",
+			"revision": "4f7f32adc53ae393ea096f6f185192d81ff1f632",
+			"revisionTime": "2018-07-16T13:11:16Z"
+		},
+		{
+			"checksumSHA1": "VtTz5I+cAV1E7++RixDwo2vkdvA=",
+			"path": "github.com/gitbubhwt/baseserver/util",
+			"revision": "4f7f32adc53ae393ea096f6f185192d81ff1f632",
+			"revisionTime": "2018-07-16T13:11:16Z"
 		},
 		{
 			"checksumSHA1": "CXrwm3uFtV/ID0sGQbeot7oWqcQ=",

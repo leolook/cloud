@@ -11,4 +11,5 @@ type TestReq struct {
 
 type TestRsp struct {
 	Name string `json:"name,omitempty"`
+	Id   int64  `json:"id"`
 }

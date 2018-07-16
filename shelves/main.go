@@ -3,8 +3,8 @@ package main
 import (
 	. "cloud/shelves/controller"
 	. "cloud/shelves/middle"
-	base "github.com/baseserver/gin"
 	"github.com/gin-gonic/gin"
+	base "github.com/gitbubhwt/baseserver/gin"
 )
 
 func main() {
@@ -12,9 +12,8 @@ func main() {
 	r := gin.Default()
 
 	b := base.BaseServer{
-		Engine:        r,
 		Server:        &Srv{},
-		Group:         "shelves",
+		Group:         r.Group("shelves"),
 		CommonReqFunc: GetCommonReq,
 	}
 	b.Register()
