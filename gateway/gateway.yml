@@ -18,8 +18,8 @@ server:
 #allow conf
 allow:
   path: [
-        /shelves/test1,
-        /shelves/test1,
-        /shelves/test1
+        shelves/test1,
+        shelves/test1,
+        shelves/test1
         ]
 

@@ -60,3 +60,12 @@ func init() {
 func GetGatewayConf() GatewayConf {
 	return gatewayConf
 }
+
+//获取allow 通过的路径
+func GetAllowPath() map[string]string {
+	mp := make(map[string]string)
+	for _, v := range gatewayConf.Allow.Path {
+		mp[v] = v
+	}
+	return mp
+}
