@@ -1,0 +1,25 @@
+#gateway conf
+gateway:
+  name: cloud
+  addr: 0.0.0.0:9090
+
+#server conf
+server:
+  center:
+     addr: 127.0.0.1:3030
+     name: center
+  shelves:
+     addr: 127.0.0.1:3030
+     name: shelves
+  file:
+     addr: 127.0.0.1:3032
+     name: file
+
+#allow conf
+allow:
+  path: [
+        /shelves/test1,
+        /shelves/test1,
+        /shelves/test1
+        ]
+

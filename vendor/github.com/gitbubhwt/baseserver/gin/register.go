@@ -3,9 +3,9 @@ package gin
 import (
 	"fmt"
 	log "github.com/alecthomas/log4go"
+	"github.com/gin-gonic/gin"
 	pb "github.com/gitbubhwt/baseserver/protocol"
 	"github.com/gitbubhwt/baseserver/util"
-	"github.com/gin-gonic/gin"
 	"net/http"
 	"reflect"
 	"strings"
@@ -144,7 +144,7 @@ func checkField(elem reflect.Value) string {
 					pass = false
 				}
 			}
-		case []string, []int64, []int, []int32, []uint32, []uint16, []uint64, []interface{}:
+		case []string, []float64, []float32, []int64, []int, []int32, []uint32, []uint16, []uint64, []interface{}:
 			{
 
 				if value.Cap() == 0 {
