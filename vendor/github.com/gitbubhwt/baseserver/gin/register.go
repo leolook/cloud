@@ -11,11 +11,13 @@ import (
 	"strings"
 )
 
+type CommonReqFunc func(ctx *gin.Context) (interface{}, error)
+
 type BaseServer struct {
 	Server        interface{}
 	Group         *gin.RouterGroup
 	Middle        gin.HandlerFunc
-	CommonReqFunc func(commonReq *reflect.Value)
+	CommonReqFunc CommonReqFunc
 }
 
 func (b *BaseServer) Register() {
@@ -68,11 +70,6 @@ func (b *BaseServer) Register() {
 			reqType = methodType.In(1)
 		}
 
-		//if commonType != nil && commonType.String() != "protocol.CommonReq" {
-		//	log.Error(fmt.Sprintf("Method input params is wrong,first param is not protocol.CommonReq,[commonType=%v]", commonType))
-		//	continue
-		//}
-
 		g.POST(methodName, func(ctx *gin.Context) {
 
 			//数据绑定
@@ -94,12 +91,18 @@ func (b *BaseServer) Register() {
 
 			//执行调用
 			var args []reflect.Value
-			if commonType != nil {
-				common := reflect.New(commonType)
-				if b.CommonReqFunc != nil {
-					b.CommonReqFunc(&common)
+			if commonType != nil && b.CommonReqFunc != nil {
+				//执行公共模块
+				common, err := b.CommonReqFunc(ctx)
+				if err != nil {
+					code, message := util.ParseError(fmt.Sprintf("%v", err))
+					ctx.JSON(http.StatusOK, util.FailRsp(code, message))
+					return
 				}
-				args = append(args, common.Elem())
+				if common == nil {
+					panic("common is nil")
+				}
+				args = append(args, reflect.ValueOf(common))
 			}
 			args = append(args, reqElem)
 
@@ -166,6 +169,7 @@ func checkField(elem reflect.Value) string {
 func doCall(ctx *gin.Context, method reflect.Value, args []reflect.Value) {
 	val := method.Call(args)
 
+	//log.Error(val[0].Interface(), val[1].Interface())
 	//调用后输出
 	if len(val) <= 0 || len(val) >= 3 {
 		log.Error(fmt.Sprintf("Method call return value is wrong,[val=%v]", val))
@@ -174,7 +178,7 @@ func doCall(ctx *gin.Context, method reflect.Value, args []reflect.Value) {
 	}
 
 	if val[1].Interface() != nil {
-		code, message := util.ParseError(val[1].String())
+		code, message := util.ParseError(fmt.Sprintf("%v", val[1].Interface()))
 		ctx.JSON(http.StatusOK, util.FailRsp(code, message))
 		return
 	}

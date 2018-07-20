@@ -101,6 +101,6 @@ func (h *Handle) allow(path string) bool {
 
 //token 验证
 func (h *Handle) checkToken(w http.ResponseWriter, req *http.Request) bool {
-
+	//todo token 验证
 	return false
 }

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>tool</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="lib/jquery-3.2.1.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="box">
+            <div class="form">
+                <div class="column">
+                    <div class="span">
+                        <span>addr:</span>
+                    </div>
+                    <div class="elem">
+                        <input type="input" name="addr" value="127.0.0.1:3306" />
+                    </div>
+                </div>
+
+                <div class="column">
+                    <div class="span">
+                        <span>user:</span>
+                    </div>
+                    <div class="elem">
+                        <input type="input" name="user" value="root" />
+                    </div>
+                </div>
+
+                <div class="column">
+                    <div class="span">
+                        <span>pwd:</span>
+                    </div>
+                    <div class="elem">
+                        <input type="password" name="pwd" value="root" />
+                    </div>
+                </div>
+
+                <div class="column">
+                    <div class="span">
+                        <span>db:</span>
+                    </div>
+                    <div class="elem">
+                        <input type="input" name="db" value="video" />
+                    </div>
+                </div>
+
+                <div class="column">
+                    <div class="submit">
+                        <button class="button button4" id="db_update_btn">update</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form">
+                <div class="column">
+                    <div class="span">
+                        <span>table:</span>
+                    </div>
+                    <div class="elem">
+                        <select name="name" id="table_select">
+                            
+                        </select>
+                    </div>
+                </div>
+
+                <div class="column">
+                    <div class="submit">
+                        <button class="button button4" id="db_run_btn">run</button>
+                    </div>
+                </div>
+
+                <div class="column">
+                    <div class="submit">
+                        <button class="button button4" id="db_clear_btn">clear</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="box">
+            <div class="column">
+                <textarea rows="20" cols="80" id="data_show">
+                       
+                </textarea>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script src="js/ajax_middle.js"></script>
+<script src="js/index.js"></script>
+<script src="js/util.js"></script>
+</html
