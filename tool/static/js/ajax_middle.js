@@ -1,4 +1,4 @@
-const http_head = "http://127.0.0.1:12020/tool/";
+const http_head = "/tool/";
 var db_info = new Object();
 
 class Ajax {

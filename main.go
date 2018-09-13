@@ -12,6 +12,10 @@ import (
 
 const SYSTEM_EXIST = 3
 
+type Hu struct{
+	T int64
+}
+
 func main() {
 	sigs := make(chan os.Signal, 1)
 	done := make(chan bool, 1)
@@ -21,9 +25,12 @@ func main() {
 		logger.Info(fmt.Sprintf("receive:%v", sig))
 		done <- true
 	}()
+
+
 	httpServer.StartUpServer()
 	<-done
 	logger.Info("exit")
+
 }
 
 func init() {

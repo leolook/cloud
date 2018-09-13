@@ -1,0 +1,14 @@
+syntax = "proto3";
+package pb;
+
+message DemoReq {
+   int32 id =1;
+}
+
+message DemoRsp {
+   int32 id =1;
+}
+
+service DemoService{
+   rpc Demo (DemoReq) returns (DemoRsp);
+}

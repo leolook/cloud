@@ -5,6 +5,7 @@ import "flag"
 var (
 	ConfPath        string
 	GatewayConfPath string
+
 )
 
 func init() {

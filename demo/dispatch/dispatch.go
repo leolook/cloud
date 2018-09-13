@@ -1,34 +1,38 @@
-package dispatch
+package main
 
 import (
-	"cloud/demo/srv"
-	"fmt"
+	"io"
+	"log"
+	"net"
 )
 
-type DispatchSrv interface {
-	Do(id int64, content string)
+func main() {
+
+	addr := "0.0.0.0:8001"
+	lis, err := net.Listen("tcp", addr)
+	if err != nil {
+		log.Printf("Failed to net.Listen(%s,%s),err=%v\n", "tcp", addr, err)
+		return
+	}
+
+	for {
+		conn, err := lis.Accept()
+		if err != nil {
+			log.Printf("Failed to accept,err=%v", err)
+			continue
+		}
+		go dispatch(conn)
+	}
 }
 
-var (
-	do map[int64]srv.Call
-)
+func dispatch(conn net.Conn) {
+	buf := make([]byte, 1024*2)
+	for {
+		_, err := conn.Read(buf)
+		if err == io.EOF {
+			break
+		}
 
-func init() {
-	do = make(map[int64]srv.Call)
-	do[0] = srv.Phone{}
-	do[1] = srv.Mobile{}
-}
-
-//调度
-type Dispatch struct {
-	//map[int64]
-}
-
-//执行调度
-func (t Dispatch) Do(id int64, content string) {
-	if v, ok := do[id]; ok {
-		v.Call(content)
-	} else {
-		fmt.Println("Not found dispatch,id:", id)
+		log.Printf("Successed to read,data=%v", string(buf))
 	}
 }

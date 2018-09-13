@@ -43,6 +43,5 @@ $("#db_run_btn").click(function() {
 
 //db clear
 $("#db_clear_btn").click(function() {
-
     $("#data_show").text("");
 });
