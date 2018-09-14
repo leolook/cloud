@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Examples</title>
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" />
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link href="" rel="stylesheet">
+    <script src="lib/jquery-3.2.1.js"></script>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    
+    html,
+    body,
+    video {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    video {
+        object-fit: fill;
+        transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        -webkit-transform: rotate(90deg);
+        -o-transform: rotate(90deg);
+    }
+</style>
+
+<body>
+    <video id="video" controls="controls" src="http://vjs.zencdn.net/v/oceans.mp4" muted x-webkit-airplay=" true " playsinline webkit-playsinline="true " x5-video-player-type="h5 "></video>
+</body>
+<script src="js/ajax_middle.js "></script>
+<script src="js/logger.js "></script>
+<script src="js/util.js "></script>
+<script src="js/play.js "></script>
+
+</html>

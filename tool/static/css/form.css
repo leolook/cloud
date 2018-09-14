@@ -1,0 +1,56 @@
+div.form {
+    width: 40%;
+    /* border: 1em solid red; */
+    float: left;
+    margin-right: 30px;
+}
+
+div.form .column {
+    width: 100%;
+    /* border: 1em solid red; */
+    float: left;
+    margin-top: 15px;
+}
+
+div.form .column .span {
+    width: 30%;
+    float: left;
+    text-align: right;
+    margin-right: 15px;
+    padding-top: 5px;
+    font-size: 16px;
+    color: #787878;
+    line-height: 30px;
+}
+
+div.form .column .elem {
+    width: 60%;
+    float: left;
+}
+
+div.form .column .submit {
+    margin-right: 30%;
+    width: 30%;
+    /* border: 1em solid red; */
+    float: right;
+}
+
+div.form .column .elem .elem-input {
+    width: 170px;
+    border: 1px solid #c1c1c1;
+    vertical-align: middle;
+    padding: 8px 10px;
+    font-size: 16px;
+    line-height: 18px;
+    color: #4d4d4d;
+    outline: none;
+    border-radius: 8px;
+}
+
+div.form .column .elem .elem-input:hover {
+    border: 1px solid red;
+}
+
+div.form .column .elem select {
+    height: 35px;
+}

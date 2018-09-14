@@ -2,12 +2,13 @@ package etcdv3
 
 import (
 	"fmt"
+	"strings"
+	"time"
+
 	log "github.com/alecthomas/log4go"
 	etcd3 "github.com/coreos/etcd/clientv3"
 	"github.com/coreos/etcd/etcdserver/api/v3rpc/rpctypes"
 	"golang.org/x/net/context"
-	"strings"
-	"time"
 )
 
 // Prefix should start and end with no slash

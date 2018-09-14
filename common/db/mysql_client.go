@@ -2,8 +2,9 @@ package db
 
 import (
 	"cloud/common/config"
-	logger "github.com/alecthomas/log4go"
 	"fmt"
+
+	logger "github.com/alecthomas/log4go"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/go-xorm/xorm"
 )
@@ -26,6 +27,7 @@ func GetEngineClient() error {
 			return err
 		}
 		//engine.ShowSQL(true)
+
 	}
 	return nil
 }

@@ -2,10 +2,11 @@ package config
 
 import (
 	"cloud/common/flag"
-	logger "github.com/alecthomas/log4go"
 	"fmt"
-	"github.com/jinzhu/configor"
 	"os"
+
+	logger "github.com/alecthomas/log4go"
+	"github.com/jinzhu/configor"
 )
 
 type AppConfig struct {

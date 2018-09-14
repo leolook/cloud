@@ -8,8 +8,9 @@ import (
 	"net"
 	"time"
 
-	"google.golang.org/grpc"
 	log "cloud/lib/log"
+
+	"google.golang.org/grpc"
 )
 
 func main() {
@@ -20,16 +21,24 @@ func main() {
 
 	listener, err := net.Listen("tcp", addr)
 	if err != nil {
-		//log.Error("Failed to net.Listen(%s,%s),err=%v\n", "tcp", addr, err)
+		log.Errorf("Failed to net.Listen(%s,%s),err=%v\n", "tcp", addr, err)
 		return
 	}
 
-	log.Infof("test:=%s","test")
+	log.Infof("test:=%s", "test")
+
+	log.Infof("hu=%s", "hu")
+
+	log.Infof("teshhhhhhhhhhh")
+
+	log.Infof("test=%+v", "test")
 
 	err = etcd.Register(name, addr, target, 10*time.Second, 15)
 	if err != nil {
 		fmt.Println(err)
 	}
+
+	log.Debugf("debug=%+v", listener)
 
 	option := proxy.Option()
 	server := grpc.NewServer(

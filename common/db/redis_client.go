@@ -2,6 +2,7 @@ package db
 
 import (
 	"cloud/common/config"
+
 	logger "github.com/alecthomas/log4go"
 	"github.com/go-redis/redis"
 )
