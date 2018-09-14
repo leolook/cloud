@@ -2,6 +2,7 @@ package main
 
 import (
 	"cloud/lib/log"
+	"cloud/lib/util"
 )
 
 type Test struct {
@@ -10,11 +11,12 @@ type Test struct {
 
 func main() {
 
-	log.Infof("test=%+v", "huge")
-
 	te := &Test{
 		Name: "te",
 	}
 
-	log.Debugf("test=%+v", *te)
+	data := util.Shell("ls")
+
+	log.Infof("%+v,%+v", te, data)
+
 }

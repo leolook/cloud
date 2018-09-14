@@ -4,7 +4,6 @@ import (
 	"cloud/demo/gateway/proxy"
 	etcd "cloud/lib/etcd3"
 
-	"fmt"
 	"net"
 	"time"
 
@@ -25,20 +24,11 @@ func main() {
 		return
 	}
 
-	log.Infof("test:=%s", "test")
-
-	log.Infof("hu=%s", "hu")
-
-	log.Infof("teshhhhhhhhhhh")
-
-	log.Infof("test=%+v", "test")
-
 	err = etcd.Register(name, addr, target, 10*time.Second, 15)
 	if err != nil {
-		fmt.Println(err)
+		log.Errorf("failed to register etcd,err=%+v,name=%v,addr=%v,target=%v", err, name, addr, target)
+		return
 	}
-
-	log.Debugf("debug=%+v", listener)
 
 	option := proxy.Option()
 	server := grpc.NewServer(
