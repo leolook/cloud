@@ -1,0 +1,4 @@
+#main.go conf
+monitor:
+  name: monitor
+  addr: 0.0.0.0:9090

@@ -1,4 +1,4 @@
-#gateway conf
+#main.go conf
 gateway:
   name: cloud
   addr: 0.0.0.0:9090

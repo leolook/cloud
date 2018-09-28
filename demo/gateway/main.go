@@ -14,7 +14,7 @@ import (
 
 func main() {
 
-	name := "gateway"
+	name := "main.go"
 	addr := "0.0.0.0:8001"
 	target := "http://127.0.0.1:2379"
 
