@@ -4,7 +4,7 @@ import (
 	"cloud/access/server/impl"
 	base "cloud/lib/base_server"
 	"fmt"
-	log "github.com/alecthomas/log4go"
+	"cloud/lib/log"
 )
 
 func main() {

@@ -3,7 +3,7 @@ package controller
 import (
 	pb "cloud/tool/protocol"
 	"fmt"
-	log "github.com/alecthomas/log4go"
+	"cloud/lib/log"
 )
 
 func (s *Srv) MobileLog(req pb.MobileLogReq) (rsp *pb.MobileLogRsp, err error) {

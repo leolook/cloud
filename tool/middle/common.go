@@ -4,7 +4,7 @@ import (
 	pb "cloud/tool/protocol"
 	"encoding/base64"
 	"fmt"
-	log "github.com/alecthomas/log4go"
+	"cloud/lib/log"
 	"github.com/gin-gonic/gin"
 	. "github.com/gitbubhwt/baseserver/util"
 )

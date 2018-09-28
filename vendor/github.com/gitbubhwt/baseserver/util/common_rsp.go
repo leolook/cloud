@@ -1,7 +1,7 @@
 package util
 
 import (
-	log "github.com/alecthomas/log4go"
+	"cloud/lib/log"
 	"github.com/gin-gonic/gin/json"
 )
 

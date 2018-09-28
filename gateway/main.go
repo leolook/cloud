@@ -4,7 +4,7 @@ import (
 	"cloud/gateway/conf"
 	"cloud/gateway/proxy"
 	"cloud/gateway/regexp"
-	log "github.com/alecthomas/log4go"
+	"cloud/lib/log"
 	"net/http"
 )
 
@@ -15,7 +15,7 @@ func main() {
 	h := &proxy.Handle{}
 	err := http.ListenAndServe(gateway.Addr, h)
 	if err != nil {
-		log.Exit(err)
+		log.Fatal(err)
 	}
 }
 

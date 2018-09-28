@@ -2,7 +2,7 @@ package proxy
 
 import (
 	"fmt"
-	log "github.com/alecthomas/log4go"
+	"cloud/lib/log"
 	"google.golang.org/grpc"
 	//"strings"
 )

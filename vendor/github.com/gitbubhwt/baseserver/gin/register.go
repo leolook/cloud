@@ -2,7 +2,7 @@ package gin
 
 import (
 	"fmt"
-	log "github.com/alecthomas/log4go"
+	"cloud/lib/log"
 	"github.com/gin-gonic/gin"
 	pb "github.com/gitbubhwt/baseserver/protocol"
 	"github.com/gitbubhwt/baseserver/util"

@@ -2,7 +2,7 @@ package fileserver
 
 import (
 	"fmt"
-	log "github.com/alecthomas/log4go"
+	"cloud/lib/log"
 	"io"
 	"mime/multipart"
 	"net/http"

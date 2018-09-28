@@ -2,7 +2,8 @@ package main
 
 import (
 	"cloud/lib/log"
-	"cloud/lib/util"
+	"reflect"
+	"strings"
 )
 
 type Test struct {
@@ -12,11 +13,22 @@ type Test struct {
 func main() {
 
 	te := &Test{
-		Name: "te",
+		Name: "胡文涛",
 	}
 
-	data := util.Shell("ls")
+	val := []*Test{te}
 
-	log.Infof("%+v,%+v", te, data)
+	typ := reflect.TypeOf(val)
+
+	v := reflect.ValueOf(val)
+
+	elem := v.
+	log.Info(elem)
+	if strings.Contains(elem.String(), "*") {
+		elem = elem.Elem()
+	}
+
+	log.Info(elem.NumField(), elem.String(), elem)
+	log.Info(typ, elem)
 
 }

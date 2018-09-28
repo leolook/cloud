@@ -3,7 +3,7 @@ package controller
 import (
 	pb "cloud/shelves/protocol"
 	"fmt"
-	log "github.com/alecthomas/log4go"
+	"cloud/lib/log"
 )
 
 func (s *Srv) Test(common pb.CommonReq, req pb.TestReq) (pb.TestRsp, error) {

@@ -5,7 +5,7 @@ import (
 	"cloud/pb"
 	"context"
 	"fmt"
-	log "github.com/alecthomas/log4go"
+	"cloud/lib/log"
 	"google.golang.org/grpc"
 	"time"
 )

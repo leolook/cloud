@@ -20,7 +20,7 @@ func main() {
 
 	listener, err := net.Listen("tcp", addr)
 	if err != nil {
-		log.Errorf("Failed to net.Listen(%s,%s),err=%v\n", "tcp", addr, err)
+		log.Errorf("failed to net.Listen(%s,%s),err=%v", "tcp", addr, err)
 		return
 	}
 

@@ -2,8 +2,7 @@ package conf
 
 import (
 	"cloud/common/flag"
-	"fmt"
-	log "github.com/alecthomas/log4go"
+	"cloud/lib/log"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
 )
@@ -51,9 +50,9 @@ func init() {
 	path := flag.GatewayConfPath
 	err := LoadGatewayConf(path)
 	if err != nil {
-		log.Exit(fmt.Sprintf("Load gatewag conf fail,[err=%v]", err))
+		log.Fatalf("Load gatewag conf fail,[err=%v]", err)
 	}
-	log.Info(fmt.Sprintf("gatewayConf=%v", gatewayConf))
+	log.Infof("gatewayConf=%v", gatewayConf)
 }
 
 //获取gateway 配置文件

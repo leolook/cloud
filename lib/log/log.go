@@ -1,125 +1,240 @@
 package log
 
 import (
-	"flag"
-	"go.uber.org/zap"
-	"go.uber.org/zap/zapcore"
-	"log"
-	"time"
+	"cloud/lib/goid"
+	"fmt"
+	"sync"
 )
 
-var Env string
-var logger *zap.SugaredLogger
-
-func init() {
-	flag.StringVar(&Env, "env", "local", "the environment")
-	flag.Parse()
-	initLog()
-}
-
-func initLog() *zap.SugaredLogger {
-
-	if logger != nil {
-		return logger
-	}
-
-	var config zap.Config
-	switch Env {
-	case "local", "dev", "test":
-		{
-			config = zap.NewDevelopmentConfig()
-		}
-	case "online":
-		{
-			config = zap.NewProductionConfig()
-		}
-	}
-
-	config.EncoderConfig.EncodeTime = func(t time.Time, enc zapcore.PrimitiveArrayEncoder) {
-		enc.AppendString(t.Format("2006-01-02 15:04:05"))
-	}
-
-	base, err := config.Build(
-		zap.AddCallerSkip(1),
-	)
-
-	if err != nil {
-		log.Printf("failed to build,config=%+v,err=%v", config, err)
-		return nil
-	}
-
-	logger = base.Sugar()
-
-	return logger
-
-}
-
-func Info(arg ...interface{}) {
-	logger.Info(arg...)
-}
-
+// Debug logs to the DEBUG log.
+// Arguments are handled in the manner of fmt.Print; a newline is appended if missing.
 func Debug(args ...interface{}) {
-	logger.Debug(args...)
+	gid := goid.Get()
+	if color, ok := GetColorByKey(gid); ok {
+		msg := fmt.Sprint(args)
+		g_logger.Sugar().Debugf(msg, "method", color.Method(), "traceid", color.TraceID(), "uid", color.Uid(), "clientversion", color.ClientVerson(), "clienttype", color.ClentType())
+	} else {
+		g_logger.Sugar().Debug(args...)
+	}
 }
 
-// Warn uses fmt.Sprint to construct and log a message.
+// Debugln logs to the INFO log.
+// Arguments are handled in the manner of fmt.Println; a newline is appended if missing.
+func Debugln(args ...interface{}) {
+	gid := goid.Get()
+	if color, ok := GetColorByKey(gid); ok {
+		msg := fmt.Sprint(args)
+		g_logger.Sugar().Debugw(msg, "method", color.Method(), "traceid", color.TraceID(), "uid", color.Uid(), "clientversion", color.ClientVerson(), "clienttype", color.ClentType())
+	} else {
+		g_logger.Sugar().Debug(args...)
+	}
+}
+
+// Debugf logs to the INFO log.
+// Arguments are handled in the manner of fmt.Printf; a newline is appended if missing.
+func Debugf(format string, args ...interface{}) {
+	gid := goid.Get()
+	if color, ok := GetColorByKey(gid); ok {
+		msg := fmt.Sprintf(format, args...)
+		g_logger.Sugar().Debugw(msg, "method", color.Method(), "traceid", color.TraceID(), "uid", color.Uid(), "clientversion", color.ClientVerson(), "clienttype", color.ClentType())
+	} else {
+		g_logger.Sugar().Debugf(format, args...)
+	}
+}
+
+// Info logs to the INFO log.
+// Arguments are handled in the manner of fmt.Print; a newline is appended if missing.
+func Info(args ...interface{}) {
+	gid := goid.Get()
+	if color, ok := GetColorByKey(gid); ok {
+		msg := fmt.Sprint(args)
+		g_logger.Sugar().Infow(msg, "method", color.Method(), "traceid", color.TraceID(), "uid", color.Uid(), "clientversion", color.ClientVerson(), "clienttype", color.ClentType())
+	} else {
+		g_logger.Sugar().Info(args...)
+	}
+}
+
+// Infoln logs to the INFO log.
+// Arguments are handled in the manner of fmt.Println; a newline is appended if missing.
+func Infoln(args ...interface{}) {
+	gid := goid.Get()
+	if color, ok := GetColorByKey(gid); ok {
+		msg := fmt.Sprint(args)
+		g_logger.Sugar().Infow(msg, "method", color.Method(), "traceid", color.TraceID(), "uid", color.Uid(), "clientversion", color.ClientVerson(), "clienttype", color.ClentType())
+	} else {
+		g_logger.Sugar().Info(args...)
+	}
+}
+
+// Infof logs to the INFO log.
+// Arguments are handled in the manner of fmt.Printf; a newline is appended if missing.
+func Infof(format string, args ...interface{}) {
+	gid := goid.Get()
+	if color, ok := GetColorByKey(gid); ok {
+		msg := fmt.Sprintf(format, args...)
+		g_logger.Sugar().Infow(msg, "method", color.Method(), "traceid", color.TraceID(), "uid", color.Uid(), "clientversion", color.ClientVerson(), "clienttype", color.ClentType())
+	} else {
+		g_logger.Sugar().Infof(format, args...)
+	}
+}
+
+func InfoW(format string, keysAndValues ...interface{}) {
+	g_logger.Sugar().Infow(format, keysAndValues...)
+}
+
+// Warning logs to the WARNING and INFO logs.
+// Arguments are handled in the manner of fmt.Print; a newline is appended if missing.
 func Warn(args ...interface{}) {
-	logger.Warn(args...)
+	gid := goid.Get()
+	if color, ok := GetColorByKey(gid); ok {
+		msg := fmt.Sprint(args)
+		g_logger.Sugar().Warnw(msg, "method", color.Method(), "traceid", color.TraceID(), "uid", color.Uid(), "clientversion", color.ClientVerson(), "clienttype", color.ClentType())
+	} else {
+		g_logger.Sugar().Warn(args...)
+	}
 }
 
-// Error uses fmt.Sprint to construct and log a message.
+func Warnw(format string, keysAndValues ...interface{}) {
+	g_logger.Sugar().Warnw(format, keysAndValues...)
+}
+
+// Warningln logs to the WARNING and INFO logs.
+// Arguments are handled in the manner of fmt.Println; a newline is appended if missing.
+func Warnln(args ...interface{}) {
+	gid := goid.Get()
+	if color, ok := GetColorByKey(gid); ok {
+		msg := fmt.Sprint(args)
+		g_logger.Sugar().Warnw(msg, "method", color.Method(), "traceid", color.TraceID(), "uid", color.Uid(), "clientversion", color.ClientVerson(), "clienttype", color.ClentType())
+	} else {
+		g_logger.Sugar().Warn(args...)
+	}
+}
+
+// Warningf logs to the WARNING and INFO logs.
+// Arguments are handled in the manner of fmt.Printf; a newline is appended if missing.
+func Warnf(format string, args ...interface{}) {
+	gid := goid.Get()
+	if color, ok := GetColorByKey(gid); ok {
+		msg := fmt.Sprintf(format, args...)
+		g_logger.Sugar().Warnw(msg, "method", color.Method(), "traceid", color.TraceID(), "uid", color.Uid(), "clientversion", color.ClientVerson(), "clienttype", color.ClentType())
+	} else {
+		g_logger.Sugar().Warnf(format, args...)
+	}
+}
+
+// Error logs to the ERROR, WARNING, and INFO logs.
+// Arguments are handled in the manner of fmt.Print; a newline is appended if missing.
 func Error(args ...interface{}) {
-	logger.Error(args...)
+	gid := goid.Get()
+	if color, ok := GetColorByKey(gid); ok {
+		msg := fmt.Sprint(args)
+		g_logger.Sugar().Errorw(msg, "method", color.Method(), "traceid", color.TraceID(), "uid", color.Uid(), "clientversion", color.ClientVerson(), "clienttype", color.ClentType())
+	} else {
+		g_logger.Sugar().Error(args...)
+	}
 }
 
-// DPanic uses fmt.Sprint to construct and log a message. In development, the
-// logger then panics. (See DPanicLevel for details.)
-func DPanic(args ...interface{}) {
-	logger.DPanic(args...)
+// Errorln logs to the ERROR, WARNING, and INFO logs.
+// Arguments are handled in the manner of fmt.Println; a newline is appended if missing.
+func Errorln(args ...interface{}) {
+	gid := goid.Get()
+	if color, ok := GetColorByKey(gid); ok {
+		msg := fmt.Sprint(args)
+		g_logger.Sugar().Errorw(msg, "method", color.Method(), "traceid", color.TraceID(), "uid", color.Uid(), "clientversion", color.ClientVerson(), "clienttype", color.ClentType())
+	} else {
+		g_logger.Sugar().Error(args...)
+	}
 }
 
-// Panic uses fmt.Sprint to construct and log a message, then panics.
-func Panic(args ...interface{}) {
-	logger.Panic(args...)
+// Errorf logs to the ERROR, WARNING, and INFO logs.
+// Arguments are handled in the manner of fmt.Printf; a newline is appended if missing.
+func Errorf(format string, args ...interface{}) {
+	gid := goid.Get()
+	if color, ok := GetColorByKey(gid); ok {
+		msg := fmt.Sprintf(format, args...)
+		g_logger.Sugar().Errorw(msg, "method", color.Method(), "traceid", color.TraceID(), "uid", color.Uid(), "clientversion", color.ClientVerson(), "clienttype", color.ClentType())
+	} else {
+		g_logger.Sugar().Errorf(format, args...)
+	}
 }
 
-// Fatal uses fmt.Sprint to construct and log a message, then calls os.Exit.
+func Errorw(format string, keysAndValues ...interface{}) {
+	g_logger.Sugar().Errorw(format, keysAndValues...)
+}
+
+// Fatal logs to the FATAL, ERROR, WARNING, and INFO logs,
+// including a stack trace of all running goroutines, then calls os.Exit(255).
+// Arguments are handled in the manner of fmt.Print; a newline is appended if missing.
 func Fatal(args ...interface{}) {
-	logger.Fatal(args...)
+	gid := goid.Get()
+	if color, ok := GetColorByKey(gid); ok {
+		msg := fmt.Sprint(args)
+		g_logger.Sugar().Errorw(msg, "method", color.Method(), "traceid", color.TraceID(), "uid", color.Uid(), "clientversion", color.ClientVerson(), "clienttype", color.ClentType())
+	} else {
+		g_logger.Sugar().Fatal(args...)
+	}
 }
 
-// Debugf uses fmt.Sprintf to log a templated message.
-func Debugf(template string, args ...interface{}) {
-	logger.Debugf(template, args)
+// Fatalln logs to the FATAL, ERROR, WARNING, and INFO logs,
+// including a stack trace of all running goroutines, then calls os.Exit(255).
+// Arguments are handled in the manner of fmt.Println; a newline is appended if missing.
+func Fatalln(args ...interface{}) {
+	gid := goid.Get()
+	if color, ok := GetColorByKey(gid); ok {
+		msg := fmt.Sprint(args)
+		g_logger.Sugar().Fatalw(msg, "method", color.Method(), "traceid", color.TraceID(), "uid", color.Uid(), "clientversion", color.ClientVerson(), "clienttype", color.ClentType())
+	} else {
+		g_logger.Sugar().Fatal(args...)
+	}
 }
 
-// Infof uses fmt.Sprintf to log a templated message.
-func Infof(template string, args ...interface{}) {
-	logger.Infof(template, args...)
+// Fatalf logs to the FATAL, ERROR, WARNING, and INFO logs,
+// including a stack trace of all running goroutines, then calls os.Exit(255).
+// Arguments are handled in the manner of fmt.Printf; a newline is appended if missing.
+func Fatalf(format string, args ...interface{}) {
+	gid := goid.Get()
+	fmt.Println(gid)
+	if color, ok := GetColorByKey(gid); ok {
+		msg := fmt.Sprintf(format, args...)
+		g_logger.Sugar().Fatalw(msg, "method", color.Method(), "traceid", color.TraceID(), "uid", color.Uid(), "clientversion", color.ClientVerson(), "clienttype", color.ClentType())
+	} else {
+		g_logger.Sugar().Fatalf(format, args...)
+	}
 }
 
-// Warnf uses fmt.Sprintf to log a templated message.
-func Warnf(template string, args ...interface{}) {
-	logger.Warnf(template, args)
+type colorI interface {
+	String() string
+	Uid() string
+	ClientVerson() string
+	Method() string
+	TraceID() string
+	ClentType() string
 }
 
-// Errorf uses fmt.Sprintf to log a templated message.
-func Errorf(template string, args ...interface{}) {
-	logger.Errorf(template, args)
+var g_color sync.Map
+
+func SetColor(val colorI) bool {
+	gid := goid.Get()
+	_, loaded := g_color.LoadOrStore(gid, val)
+	return !loaded
 }
 
-// DPanicf uses fmt.Sprintf to log a templated message. In development, the
-// logger then panics. (See DPanicLevel for details.)
-func DPanicf(template string, args ...interface{}) {
-	logger.DPanicf(template, args)
+func GetColorByKey(key int64) (colorI, bool) {
+	val, ok := g_color.Load(key)
+	if !ok {
+		return nil, ok
+	} else {
+		return val.(colorI), ok
+	}
 }
 
-// Panicf uses fmt.Sprintf to log a templated message, then panics.
-func Panicf(template string, args ...interface{}) {
-	logger.Panicf(template, args)
+func GetColor() (colorI, bool) {
+	gid := goid.Get()
+	val, ok := g_color.Load(gid)
+	return val.(colorI), ok
 }
 
-// Fatalf uses fmt.Sprintf to log a templated message, then calls os.Exit.
-func Fatalf(template string, args ...interface{}) {
-	logger.Fatalf(template, args)
+func DelColor() {
+	gid := goid.Get()
+	g_color.Delete(gid)
 }

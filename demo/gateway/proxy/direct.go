@@ -1,10 +1,10 @@
 package proxy
 
 import (
+	"cloud/lib/log"
 	"cloud/lib/pool"
 	"context"
 	"fmt"
-	log "github.com/alecthomas/log4go"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/transport"
 	"strings"
@@ -32,8 +32,6 @@ func Option() []grpc.ServerOption {
 			return err
 		}
 
-		//callBack(stream, sync.Request())
-
 		resChan := sync.Request()
 		for i := 0; i < 1; i++ {
 			select {
@@ -45,7 +43,7 @@ func Option() []grpc.ServerOption {
 
 					err := stream.SendMsg(v.Buf)
 					if err != nil {
-						log.Error(fmt.Sprintf("Failed to send msg from server stream,err=%v", err))
+						log.Errorf("Failed to send msg from server stream,err=%v", err)
 						return err
 					}
 				}
@@ -67,7 +65,7 @@ func initPool() map[string]*pool.ConnPool {
 
 	mp := make(map[string]*pool.ConnPool)
 	if err != nil {
-		log.Error(fmt.Sprintf("Failed to new connect pool,err=%v", err))
+		log.Errorf("Failed to new connect pool,err=%v", err)
 		return mp
 	}
 
@@ -143,7 +141,7 @@ func (s *SyncRequest) Request() chan *SyncResponse {
 		var buf Frame
 		err = s.Stream.RecvMsg(&buf)
 		if err != nil {
-			log.Error(fmt.Sprintf("Failed to recv msg from server stream,err=%v", err))
+			log.Errorf("Failed to recv msg from server stream,err=%v", err)
 			res <- &SyncResponse{
 				Err: err,
 			}
@@ -169,7 +167,7 @@ func (s *SyncRequest) Request() chan *SyncResponse {
 		go func() {
 			err = clientStream.SendMsg(&buf)
 			if err != nil {
-				log.Error(fmt.Sprintf("Failed to send msg by client stream(%s),err=%v", s.ClientName, err))
+				log.Errorf("Failed to send msg by client stream(%s),err=%v", s.ClientName, err)
 				res <- &SyncResponse{
 					Err: err,
 				}
@@ -180,7 +178,7 @@ func (s *SyncRequest) Request() chan *SyncResponse {
 		//接收客户端返回的数据
 		err = clientStream.RecvMsg(&buf)
 		if err != nil {
-			log.Error(fmt.Sprintf("Failed to recv msg from client stream(%s),err=%v", s.ClientName, err))
+			log.Errorf("Failed to recv msg from client stream(%s),err=%v", s.ClientName, err)
 			res <- &SyncResponse{
 				Err: err,
 			}
