@@ -6,4 +6,8 @@ type RegReq struct {
 	PhysicalAddr string `json:"physicalAddr"`
 }
 
-
+type RefRsp struct {
+	Name string
+	Code int64
+	Msg  string
+}

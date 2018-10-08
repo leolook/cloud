@@ -1,15 +1,18 @@
 package service
 
 import (
-	pro "cloud/httpproto/monitor"
-	"github.com/gin-gonic/gin"
+	"cloud/httpproto/monitor"
+	"cloud/lib/log"
 )
 
-func Register(c *gin.Context) {
+func (s *Server) Register(req *monitor.RegReq) error {
 
-	var req pro.RegReq
-	err := c.Bind(&req)
-	if err != nil {
-		
-	}
+	log.Infof("register=%+v", req)
+
+	return nil
+}
+
+func (s *Server) Register1(req *monitor.RegReq) (rsp *monitor.RefRsp, err error) {
+
+	return nil, nil
 }
